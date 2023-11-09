@@ -1,0 +1,16 @@
+.input {
+  @apply text-sm;
+  @apply font-normal;
+  @apply leading-5;
+  @apply px-3;
+  @apply py-1;
+  @apply rounded-lg;
+  @apply bg-transparent;
+  @apply border;
+  @apply border-solid;
+  @apply border-slate-300;
+  @apply hover:border-purple-500;
+  @apply focus:border-purple-500;
+  @apply bg-transparent;
+  @apply focus-visible:outline-0;
+}

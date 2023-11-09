@@ -1,0 +1,56 @@
+.theme-mode-button-wrapper {
+  @apply w-8;
+  @apply h-8;
+  perspective: 9000px;
+  @apply p-1;
+  @apply border;
+  @apply border-slate-200;
+  @apply rounded-full;
+  @apply cursor-pointer;
+  @apply bg-white;
+  @apply transition-colors;
+  @apply duration-300;
+
+  
+}
+
+.theme-mode-button {
+  @apply relative;
+  @apply w-full;
+  @apply h-full;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.theme-mode-button-wrapper.darkMode {
+  @apply dark:bg-dark-mode-primary;
+  @apply transition-colors;
+  @apply duration-300;
+
+  .theme-mode-button{
+    transform: rotateY(180deg);
+  }
+}
+
+.theme-mode-light, .theme-mode-dark {
+  @apply absolute;
+  @apply w-full;
+  @apply h-full;
+  @apply text-center;
+  @apply flex;
+  @apply items-center;
+  @apply justify-center;
+  transition: all;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.theme-mode-light {
+  @apply text-black;
+}
+
+.theme-mode-dark {
+  @apply text-white;
+  
+  transform: rotateY(180deg);
+}

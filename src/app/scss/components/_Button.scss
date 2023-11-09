@@ -1,0 +1,15 @@
+.btn{
+  @apply cursor-pointer;
+  @apply disabled:cursor-not-allowed;
+  @apply text-sm;
+  @apply bg-violet-500;
+  @apply hover:bg-violet-600;
+  @apply active:bg-violet-700;
+  @apply text-white;
+  @apply rounded-md;
+  @apply font-semibold;
+  @apply px-4;
+  @apply py-2;
+  @apply border-none;
+  @apply disabled:opacity-50;
+}

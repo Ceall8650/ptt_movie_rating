@@ -1,0 +1,40 @@
+table {
+  @apply w-full;
+  @apply border-collapse;
+  @apply bg-white;
+  @apply rounded-md;
+  @apply overflow-hidden;
+}
+
+th, td {
+  @apply px-4 py-2;
+}
+
+th {
+  @apply bg-blue-400;
+  @apply text-white;
+  @apply sticky;
+  @apply top-0;
+}
+
+tbody tr {
+  @apply border-b border-gray-100;
+
+  &:hover {
+    @apply bg-gray-100;
+  }
+}
+
+.table-sticky {
+  @apply h-full;
+  @apply overflow-auto;
+  
+  table {
+    @apply overflow-auto;
+  }
+
+  th {
+    @apply sticky;
+    @apply top-0;
+  }
+}

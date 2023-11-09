@@ -5,10 +5,11 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -19,7 +20,15 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "app/*": ["./src/app/*"],
+      "assets/*": ["./src/app/assets/*"],
+      "components/*": ["./src/app/components/*"],
+      "common/*": ["./src/app/common/*"],
+      "enums/*": ["./src/app/enums/*"],
+      "pages/*": ["./src/app/pages/*"],
+      "services/*": ["./src/app/services/*"],
+      "store/*": ["./src/app/store/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

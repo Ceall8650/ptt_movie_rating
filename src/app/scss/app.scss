@@ -1,0 +1,13 @@
+@import "./font";
+@import "./atomic";
+@import "./components";
+@import "./pages";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  @apply w-full;
+  @apply h-full;
+}
