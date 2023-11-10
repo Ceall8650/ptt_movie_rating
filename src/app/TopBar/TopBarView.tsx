@@ -5,7 +5,7 @@ type Props = {
   className?: string
 }
 
-function TopBar({ className }: Props) {
+function TopBarView({ className }: Props) {
   const rootClassName = `fixed top-0 left-0 z-[1] w-full bg-white dark:bg-dark-mode-primary flex justify-between px-6 py-4 drop-shadow-lg`;
 
   return (
@@ -19,4 +19,4 @@ function TopBar({ className }: Props) {
   )
 }
 
-export default TopBar
+export default TopBarView

@@ -2,44 +2,36 @@
 
 import { KeyboardEvent, useState, ChangeEvent } from 'react';
 import Review from 'services/Review';
+import { useAppDispatch } from 'store/hooks';
+import { searchMovies } from 'store/slices/movieSlice';
 import InputText from 'components/Input/InputText';
 
 type Props = {
   className?: string,
 }
 
-function SearchBar({ className }: Props) {
-  const [keyword, setLKeyword] = useState('')
+function TopBarSearchBar({ className }: Props) {
+  const [keyword, setKeyword] = useState('')
   const [isSearching, setIsSearching] = useState(false)
-  const [allReviews, setAllReviews] = useState<Review[]|null>(null)
+  const dispatch = useAppDispatch()
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setLKeyword(e.target.value)
-  }
-
-  function search() {
-    if (keyword) {
-      handleSearch(keyword)
+  async function handleSearch() {
+    try {
+      if(keyword) {
+        setIsSearching(true)
+  
+        await dispatch(searchMovies(keyword))
+  
+        setIsSearching(false)
+      }
+    } catch (error) {
+      console.log('error :>> ', error);
     }
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
-      search()
-    }
-  }
-
-  async function handleSearch(keyword:string) {
-    try {
-      setIsSearching(true)
-      setAllReviews(null)
-
-      const allReviews = await Review.getAll(keyword);
-  
-      setIsSearching(false)
-      setAllReviews(allReviews)
-    } catch (error) {
-      console.log('error :>> ', error);
+      handleSearch()
     }
   }
 
@@ -49,15 +41,15 @@ function SearchBar({ className }: Props) {
         placeholder='Enter a movie name'
         className='w-full border-0'
         onKeyDown={handleKeyDown}
-        onChange={e => handleChange(e)}
+        onChange={(e:ChangeEvent<HTMLInputElement>) => setKeyword(e.target.value)}
         disabled={isSearching}
       />
       <i 
         className="icon-search dib text-2xl cursor-pointer"
-        onClick={search} 
+        onClick={handleSearch} 
       />
     </div>
   )
 }
 
-export default SearchBar
+export default TopBarSearchBar
