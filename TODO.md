@@ -27,5 +27,31 @@ Tech Stack
 - [X] Redux Toolkit
 - [X] React Redux
 
+
+Workflow:
+
+## Initial
+
+- Home page
+  - Top bar
+    - Display Logo
+    - Display search bar
+      - Input the keyword and search the related movies with `API`
+  - Main content
+    - [ ] Display the search icon before the API is finished
+    - [x] Loading all movies with `API`
+    - [x] Display the movie with the pic and name
+    - [ ] Display the pagination
+
+## Search
+- Searching 
+  - [ ] Display the search icon
+- Match the keyword
+  - [X] Display "No result found" image
+  - [X] Show a prompt message below the image
+-  Movie found
+  - [X] Display the movies matched the keyword
+
 FIXME:
 - When the page is dark mode, it should not be opened from the light mode while page loading
+- The movie poster has different heights
