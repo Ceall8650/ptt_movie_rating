@@ -49,9 +49,10 @@ const Movies = {
     return results.map(movie => handleMovieResponse(movie))
   },
   async search(keyword: string):Promise<FormattedResponseMovie[]> {
-    // https://api.themoviedb.org/3/search/movie?query=Freddy&language=en-US&page=1
-
-    const { results } = await authFetch.get(getTmdbApi(`search/movie?query=${keyword}`), { page: 1 }) as TmdbResponse<ResponseMovie>
+    const { results } = await authFetch.get(getTmdbApi(`search/movie`), { 
+      page: 1,
+      query: keyword
+    }) as TmdbResponse<ResponseMovie>
 
     return results.map(movie => handleMovieResponse(movie))
   }
