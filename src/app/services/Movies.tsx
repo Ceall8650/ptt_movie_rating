@@ -23,7 +23,7 @@ function getTmdbApi(path:string):string {
   return `${TMDB_BASE_URL}${path}`
 }
 
-function handleMovieResponse(movie:ResponseMovie):FormattedResponseMovie {
+function handleMovieFormat(movie:ResponseMovie): FormattedResponseMovie {
   return {
     adult: movie.adult,
     backdropPath: movie.backdrop_path,
@@ -42,19 +42,28 @@ function handleMovieResponse(movie:ResponseMovie):FormattedResponseMovie {
   }
 }
 
-const Movies = {
-  async getPopularList():Promise<FormattedResponseMovie[]> {
-    const { results } = await authFetch.get(getTmdbApi('movie/popular'), { page: 1 }) as TmdbResponse<ResponseMovie>
+function handleTmdbResponse(response:TmdbResponse<ResponseMovie>):FormattedTmdbResponse<FormattedResponseMovie> {
+  return {
+    page: response.page,
+    movies: response.results.map(movie => handleMovieFormat(movie)),
+    totalPages: response.total_pages,
+    totalResults: response.total_results
+  }
+}
 
-    return results.map(movie => handleMovieResponse(movie))
+const Movies = {
+  async getPopularList():Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
+    const response = await authFetch.get(getTmdbApi('movie/popular'), { page: 1 }) as TmdbResponse<ResponseMovie>
+
+    return handleTmdbResponse(response)
   },
-  async search(keyword: string):Promise<FormattedResponseMovie[]> {
-    const { results } = await authFetch.get(getTmdbApi(`search/movie`), { 
+  async search(keyword: string):Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
+    const response = await authFetch.get(getTmdbApi(`search/movie`), { 
       page: 1,
       query: keyword
     }) as TmdbResponse<ResponseMovie>
 
-    return results.map(movie => handleMovieResponse(movie))
+    return handleTmdbResponse(response)
   }
 }
 

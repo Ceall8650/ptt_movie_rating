@@ -5,7 +5,7 @@ type Props = {
   movie: FormattedResponseMovie
 }
 
-function PopularMovie({ movie }: Props) {
+function MoviePoster({ movie }: Props) {
   return (
     <div 
       key={movie.id} 
@@ -54,4 +54,4 @@ function PopularMovie({ movie }: Props) {
   )
 }
 
-export default PopularMovie
+export default MoviePoster

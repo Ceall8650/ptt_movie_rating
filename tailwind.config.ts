@@ -22,6 +22,25 @@ const config: Config = {
       boxShadow: {
         'theme-mode-button': '0 0 1px #2196F3'
       },
+      keyframes: {
+        dotOne: {
+          '0%, 15%': { opacity: '0' },
+          '25%, 100%': { opacity: '1' },
+        },
+        dotTwo: {
+          '0%, 15%': { opacity: '0' },
+          '50%, 100%': { opacity: '1' },
+        },
+        dotThree: {
+          '0%, 15%': { opacity: '0' },
+          '75%, 100%': { opacity: '1' },
+        },
+      },
+      animation: {
+        dotOne: 'dotOne 2s infinite linear',
+        dotTwo: 'dotTwo 2s infinite linear',
+        dotThree: 'dotThree 2s infinite linear',
+      }
     },
   },
   plugins: [

@@ -1,9 +1,8 @@
 'use client'
 
 import { KeyboardEvent, useState, ChangeEvent } from 'react';
-import Review from 'services/Review';
 import { useAppDispatch } from 'store/hooks';
-import { searchMovies } from 'store/slices/movieSlice';
+import { searchMovies, mutateKeyword } from 'store/slices/movieSlice';
 import InputText from 'components/Input/InputText';
 
 type Props = {
@@ -19,6 +18,7 @@ function TopBarSearchBar({ className }: Props) {
     try {
       if(keyword) {
         setIsSearching(true)
+        dispatch(mutateKeyword(keyword))
   
         await dispatch(searchMovies(keyword))
   
