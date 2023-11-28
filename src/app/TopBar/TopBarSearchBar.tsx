@@ -2,7 +2,10 @@
 
 import { KeyboardEvent, useState, ChangeEvent } from 'react';
 import { useAppDispatch } from 'store/hooks';
-import { searchMovies, mutateKeyword } from 'store/slices/movieSlice';
+import {
+  searchMovies,
+  mutateKeyword
+} from 'store/slices/movieSlice';
 import InputText from 'components/Input/InputText';
 
 type Props = {
@@ -16,12 +19,12 @@ function TopBarSearchBar({ className }: Props) {
 
   async function handleSearch() {
     try {
-      if(keyword) {
+      if (keyword) {
         setIsSearching(true)
         dispatch(mutateKeyword(keyword))
-  
+
         await dispatch(searchMovies(keyword))
-  
+
         setIsSearching(false)
       }
     } catch (error) {
@@ -41,12 +44,13 @@ function TopBarSearchBar({ className }: Props) {
         placeholder='Enter a movie name'
         className='w-full border-0'
         onKeyDown={handleKeyDown}
-        onChange={(e:ChangeEvent<HTMLInputElement>) => setKeyword(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => setKeyword(e.target.value)}
         disabled={isSearching}
       />
-      <i 
+      <i
+        aria-hidden="true"
         className="icon-search dib text-2xl cursor-pointer"
-        onClick={handleSearch} 
+        onClick={handleSearch}
       />
     </div>
   )
