@@ -12,6 +12,7 @@ const config: Config = {
     extend: {
       colors: {
         'dark-mode-primary': '#111827',
+        'dark-mode-modal': '#0a0b0e',
         'loading': '#679cc5'
       },
       backgroundImage: {
@@ -40,6 +41,10 @@ const config: Config = {
         dotOne: 'dotOne 2s infinite linear',
         dotTwo: 'dotTwo 2s infinite linear',
         dotThree: 'dotThree 2s infinite linear',
+      },
+      zIndex: {
+        'topBar': '1',
+        'modal': '2',
       }
     },
   },
