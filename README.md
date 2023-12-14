@@ -1,4 +1,4 @@
-# PTT_Movie_Rating
+# PTT Movie Rating
 You can get the rating of each movie that published in PTT movie group
 
 # Environment requirement
