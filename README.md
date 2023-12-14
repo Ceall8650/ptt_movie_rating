@@ -1,5 +1,5 @@
-# PTT_Movie_Crawler
-You can get the all opinions of a movie that published in PTT movie group
+# PTT_Movie_Rating
+You can get the rating of each movie that published in PTT movie group
 
 # Environment requirement
 - Node.js: v18.15.0 or later
