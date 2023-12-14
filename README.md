@@ -4,6 +4,11 @@ You can get the all opinions of a movie that published in PTT movie group
 # Environment requirement
 - Node.js: v18.15.0 or later
 
+# Tech Stack
+- Next.js v14
+- TypeScript 5
+- Tailwind 3
+
 ## Getting Started
 
 First, run the development server:
