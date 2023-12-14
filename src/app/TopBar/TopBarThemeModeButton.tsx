@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-function TopBarThemeModeButton() {  
+function TopBarThemeModeButton() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const handleDarkMode = useCallback((isDarkMode:boolean) => {
-    if(isDarkMode) {
+  const handleDarkMode = useCallback((isDarkMode: boolean) => {
+    if (isDarkMode) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
@@ -23,20 +23,20 @@ function TopBarThemeModeButton() {
 
   return (
     <div
-      className={`theme-mode-button-wrapper${isDarkMode ? ' darkMode' : '' }`}
-      onClick={() => handleDarkMode(!isDarkMode) }
+      className={`theme-mode-button-wrapper${isDarkMode ? ' darkMode' : ''}`}
+      onClick={() => handleDarkMode(!isDarkMode)}
     >
       <div className="theme-mode-button">
         <div className="theme-mode-light">
           <i
             className='icon-sun text-xl'
-            aria-hidden="true" 
+            aria-hidden="true"
           />
         </div>
         <div className="theme-mode-dark">
           <i
             className='icon-moon text-xl'
-            aria-hidden="true" 
+            aria-hidden="true"
           />
         </div>
       </div>

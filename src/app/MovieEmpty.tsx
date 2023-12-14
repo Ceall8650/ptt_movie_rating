@@ -8,7 +8,7 @@ type Props = {
 function EmptyResult({ className }: Props) {
   let rootClassName = "w-full h-full flex flex-col justify-center items-center"
 
-  if(className) {
+  if (className) {
     rootClassName = `${rootClassName} ${className}`
   }
 
