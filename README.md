@@ -22,4 +22,4 @@ pnpm dev
 ```
 
 ## Deploy on Vercel
-[Demo](https://ptt-movie-rating-hsuno0arr-ceall8650.vercel.app/)
+[Demo](https://ptt-movie-rating.vercel.app//)
