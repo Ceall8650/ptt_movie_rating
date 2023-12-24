@@ -58,8 +58,6 @@ async function getAllDiscussion(maxPageNumber:number, keyword:string) {
           }
         }
 
-        console.log('convertedNrec :>> ', convertedNrec);
-
         return {
           category: $(item).find('.title').text().match(/(\[|\［)(.*?)(\]|\］)/g), 
           nrec: convertedNrec,
