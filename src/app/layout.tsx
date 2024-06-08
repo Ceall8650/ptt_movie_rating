@@ -19,8 +19,16 @@ export default function RootLayout({
   const darkModeClassName = 'dark:bg-dark-mode-primary dark:text-white'
  
   return (
-    <html lang="en" className={`${inter.className}`}>
-        <body className={`${inter.className} ${darkModeClassName}`}>
+    <html
+      lang="en"
+      className={`${inter.className}`}
+    >
+      <body
+        className={`${inter.className} ${darkModeClassName}`}
+        // Add `suppressHydrationWarning` prevent the warning in console because of the chrome extensions
+        // Based on: https://stackoverflow.com/a/75339011 
+        suppressHydrationWarning={true}
+      >
           <StoreProvider>
             {children}
           </StoreProvider>
