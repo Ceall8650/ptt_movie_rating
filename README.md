@@ -2,19 +2,21 @@
 You can get the rating of each movie that published in PTT movie group
 
 ## Tech Stack
-- Next.js v14(App Router)
-- TypeScript 5
-- Tailwind 3
+- Next.js - App Router(v14)
+- TypeScript
+- Tailwind CSS X SCSS
+- Redux Toolkit
+- React Redux
 
 ## Feature
 - Popular Movie list
-- Rating for each movie based on the PTT Movie Forum
+- Rating scores for each movie based on the PTT Movie Forum
 - Movie Search
 - Light/Dark mode
 
 ## Performance Tune
 - Responsive Web Design(RWD)
-- Lazy loading
+- Image Lazy loading
 
 ## Environment requirement
 - Node.js: v18.15.0 or later

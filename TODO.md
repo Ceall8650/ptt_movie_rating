@@ -38,14 +38,14 @@ Workflow:
     - Display search bar
       - Input the keyword and search the related movies with `API`
   - Main content
-    - [ ] Display the search icon before the API is finished
+    - [X] Display the search icon before the API is finished
     - [x] Loading all movies with `API`
     - [x] Display the movie with the pic and name
     - [ ] Display the pagination
 
 ## Search
 - Searching 
-  - [ ] Display the search icon
+  - [X] Display the search icon
 - Match the keyword
   - [X] Display "No result found" image
   - [X] Show a prompt message below the image
