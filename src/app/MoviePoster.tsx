@@ -8,7 +8,7 @@ import MovieDetailModal from "./MovieDetailModal";
 import MoviePosterTitle from "./MoviePosterTitle";
 
 type Props = {
-	movie: FormattedResponseMovie;
+	readonly movie: FormattedResponseMovie;
 };
 
 function MoviePoster({ movie }: Props) {
@@ -20,7 +20,6 @@ function MoviePoster({ movie }: Props) {
 	return (
 		<>
 			<div
-				key={movie.id}
 				className={`flex
           flex-col
           items-center 
@@ -28,6 +27,8 @@ function MoviePoster({ movie }: Props) {
           group
         `}
 				onClick={() => setIsModalOpened(true)}
+				role="button"
+				tabIndex={0}
 			>
 				<div className="relative mb-2">
 					<Image
