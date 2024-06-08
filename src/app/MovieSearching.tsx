@@ -18,6 +18,8 @@ function MovieSearching({ className }: Props) {
         src={SearchingImage}
         alt='Searching'
         sizes="100vw 100vw"
+        // Set the priority to improve the LCP
+        priority
         style={{
           width: '25%',
           height: 'auto',
