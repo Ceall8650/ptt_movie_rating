@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from 'store/index';
 import Movies from 'services/Movies';
 
@@ -8,6 +8,24 @@ type movieState = {
   totalResults: number,
   value: number
 }
+
+export const getPopularMovies = createAsyncThunk<FormattedTmdbResponse<FormattedResponseMovie>>(
+  "movie/fetchPopularMovies",
+  async () => Movies.getPopularList()
+)
+
+export const searchMovies = createAsyncThunk<
+  FormattedTmdbResponse<FormattedResponseMovie>,
+  string,
+  { dispatch: AppDispatch }
+>(
+  "movie/searchMovies",
+  async (keyword:string, { dispatch } ) => {
+    dispatch(mutateSearchResult({ movies: null, totalResults: 0 }))
+
+    return Movies.search(keyword)
+  }
+)
 
 const initialState: movieState = {
   movies: null,
@@ -27,6 +45,21 @@ const movieSlice = createSlice({
       state.movies = action.payload.movies
       state.totalResults = action.payload.totalResults
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getPopularMovies.fulfilled, (state, action: PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) => {
+        const { movies, totalResults } = action.payload
+
+        state.movies = movies
+        state.totalResults = totalResults
+      })
+      .addCase(searchMovies.fulfilled, (state, action: PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) => {
+        const { movies, totalResults } = action.payload
+
+        state.movies = movies
+        state.totalResults = totalResults
+      })
   }
 })
 
@@ -34,18 +67,5 @@ export const {
   mutateSearchResult, 
   mutateKeyword,
 } = movieSlice.actions
-
-export const getPopularMovies = () => async (dispatch: AppDispatch) => {
-  const { movies, totalResults } = await Movies.getPopularList();
-  dispatch(mutateSearchResult({ movies, totalResults }))
-}
-
-export const searchMovies = (keyword:string) => async (dispatch: AppDispatch) => {
-  dispatch(mutateSearchResult({ movies: null, totalResults: 0 }))
-  
-  const { movies, totalResults } = await Movies.search(keyword)
-  
-  dispatch(mutateSearchResult({ movies, totalResults }))
-}
 
 export default movieSlice.reducer
