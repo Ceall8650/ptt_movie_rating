@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppDispatch } from "store/hooks";
-import { getPopularMovies } from "store/slices/movieSlice";
+import { usePopularMovies } from 'services/hooks/usePopularMovies';
 import TopBarSearchBar from "./TopBarSearchBar";
 import TopBarThemeModeButton from "./TopBarThemeModeButton";
 
@@ -10,11 +10,11 @@ type Props = {
 };
 
 function TopBarView({ className }: Props) {
-	const dispatch = useAppDispatch();
+	const { refetch } = usePopularMovies()
 	const rootClassName = `fixed top-0 left-0 z-topBar w-full bg-white dark:bg-dark-mode-primary flex justify-between px-6 py-4 drop-shadow-lg`;
 
 	function handlePopularClick() {
-		dispatch(getPopularMovies());
+		refetch()
 	}
 
 	return (

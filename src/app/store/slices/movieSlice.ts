@@ -9,11 +9,6 @@ type movieState = {
   value: number
 }
 
-export const getPopularMovies = createAsyncThunk<FormattedTmdbResponse<FormattedResponseMovie>>(
-  "movie/fetchPopularMovies",
-  async () => Movies.getPopularList()
-)
-
 export const searchMovies = createAsyncThunk<
   FormattedTmdbResponse<FormattedResponseMovie>,
   string,
@@ -48,12 +43,6 @@ const movieSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPopularMovies.fulfilled, (state, action: PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) => {
-        const { movies, totalResults } = action.payload
-
-        state.movies = movies
-        state.totalResults = totalResults
-      })
       .addCase(searchMovies.fulfilled, (state, action: PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) => {
         const { movies, totalResults } = action.payload
 

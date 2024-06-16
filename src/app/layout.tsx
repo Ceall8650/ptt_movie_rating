@@ -1,8 +1,8 @@
 import { Inter } from 'next/font/google'
 import './scss/app.scss'
-import StoreProvider from './store/StoreProvider';
+import Providers from './Providers';
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
 })
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const darkModeClassName = 'dark:bg-dark-mode-primary dark:text-white'
- 
+
   return (
     <html
       lang="en"
@@ -29,10 +29,10 @@ export default function RootLayout({
         // Based on: https://stackoverflow.com/a/75339011 
         suppressHydrationWarning={true}
       >
-          <StoreProvider>
+        <Providers>
             {children}
-          </StoreProvider>
-        </body>
-      </html>
+        </Providers>
+      </body>
+    </html>
   )
 }

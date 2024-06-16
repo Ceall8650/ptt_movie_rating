@@ -1,22 +1,5 @@
 import authFetch from './utilities/authFetch';
 
-type ResponseMovie = {
-  "adult": boolean,
-  "backdrop_path": string,
-  "genre_ids": number[],
-  "id": number,
-  "original_language": string,
-  "original_title": string,
-  "overview": string,
-  "popularity": number,
-  "poster_path": string,
-  "release_date": string,
-  "title": string,
-  "video": false,
-  "vote_average": number,
-  "vote_count": number
-}
-
 const TMDB_BASE_URL = 'https://api.themoviedb.org/3/'
 
 function getTmdbApi(path:string):string {
@@ -52,11 +35,6 @@ function handleTmdbResponse(response:TmdbResponse<ResponseMovie>):FormattedTmdbR
 }
 
 const Movies = {
-  async getPopularList():Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
-    const response = await authFetch.get(getTmdbApi('movie/popular'), { page: 1 }) as TmdbResponse<ResponseMovie>
-
-    return handleTmdbResponse(response)
-  },
   async search(keyword: string):Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
     const response = await authFetch.get(getTmdbApi(`search/movie`), { 
       page: 1,
