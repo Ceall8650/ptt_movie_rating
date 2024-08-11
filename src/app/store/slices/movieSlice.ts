@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch } from 'store/index';
-import Movies from 'services/Movies';
+import {
+  search
+} from 'services/Movies';
 
 type movieState = {
   movies: FormattedResponseMovie[]|null,
@@ -18,7 +20,7 @@ export const searchMovies = createAsyncThunk<
   async (keyword:string, { dispatch } ) => {
     dispatch(mutateSearchResult({ movies: null, totalResults: 0 }))
 
-    return Movies.search(keyword)
+    return search(keyword)
   }
 )
 

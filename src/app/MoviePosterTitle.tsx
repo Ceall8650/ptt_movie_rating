@@ -4,9 +4,9 @@ import REVIEW from "services/Review";
 import Image from "next/image";
 import LikeImage from "assets/images/like.png";
 
-type Props = {
+type Props = Readonly<{
 	title: string;
-};
+}>;
 
 type ReviewMap = {
 	goods: Review[];

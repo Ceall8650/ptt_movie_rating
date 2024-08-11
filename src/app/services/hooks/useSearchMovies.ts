@@ -1,4 +1,4 @@
-import { useQuery, UndefinedInitialDataOptions } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useAppDispatch } from "store/hooks";
 import authFetch from 'services/utilities/authFetch';
 import { getTmdbApi } from 'services/utilities/apiPath';
@@ -6,25 +6,22 @@ import { handleTmdbResponse } from 'services/utilities/movie';
 import { mutateSearchResult } from 'store/slices/movieSlice';
 import { useEffect } from 'react';
 
-const path = getTmdbApi('movie/popular')
+const path = getTmdbApi('search/movie')
 
-async function getPopularList(page=1):Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
-  const response = await authFetch.get(path, { page }) as TmdbResponse<ResponseMovie>
+async function getSearchList(keyword: string, page=1):Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
+  const response = await authFetch.get(path, { 
+    page, 
+    query: keyword 
+  }) as TmdbResponse<ResponseMovie>
 
   return handleTmdbResponse(response)
 }
 
-type Options = { 
-  page?: number,
-  enabled?: boolean
-} 
-
-function usePopularMovies(options?: Options) {
+function useSearchMovies(keyword: string, page=1) {
   const dispatch = useAppDispatch()
-  const page = options?.page ?? 1
   const query = useQuery({
-    queryKey: [path, page],
-    queryFn:  () => getPopularList(page),
+    queryKey: [path],
+    queryFn:  () => getSearchList(keyword, page)
   })
   const { isSuccess, data } = query
   
@@ -38,6 +35,6 @@ function usePopularMovies(options?: Options) {
 }
 
 export {
-  getPopularList,
-  usePopularMovies
+  getSearchList,
+  useSearchMovies
 }

@@ -1,8 +1,8 @@
 import MoviePoster from "./MoviePoster";
 
-type Props = {
+type Props = Readonly<{
 	movies: FormattedResponseMovie[];
-};
+}>;
 
 function MovieList({ movies }: Props) {
 	return (

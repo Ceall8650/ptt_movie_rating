@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import noResultImage from 'assets/images/noResult.svg';
 
-type Props = {
+type Props = Readonly<{
   className?: string
-}
+}>
 
-function EmptyResult({ className }: Props) {
+function MovieEmpty({ className }: Props) {
   let rootClassName = "w-full h-full flex flex-col justify-center items-center"
 
   if (className) {
@@ -28,4 +28,4 @@ function EmptyResult({ className }: Props) {
   )
 }
 
-export default EmptyResult
+export default MovieEmpty

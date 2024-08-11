@@ -1,6 +1,5 @@
 import ModalBase from "components/Modal/ModalBase";
 import Image from "next/image";
-import REVIEW from "services/Review";
 
 type Props = {
 	movie: FormattedResponseMovie;
@@ -9,8 +8,6 @@ type Props = {
 };
 
 function MovieDetailModal({ onClose, movie, imageSource }: Props) {
-	const reviews = REVIEW.getAll(movie.title);
-
 	return (
 		<ModalBase
 			id="movie-detail-modal"

@@ -34,15 +34,20 @@ function handleTmdbResponse(response:TmdbResponse<ResponseMovie>):FormattedTmdbR
   }
 }
 
-const Movies = {
-  async search(keyword: string):Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
-    const response = await authFetch.get(getTmdbApi(`search/movie`), { 
-      page: 1,
-      query: keyword
-    }) as TmdbResponse<ResponseMovie>
+export const popularMoviePath = 'movie/popular'
+export const movieSearchPath = 'search/movie'
 
-    return handleTmdbResponse(response)
-  }
+export async function getPopularList(page = 1): Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
+  const response = await authFetch.get(getTmdbApi('movie/popular'), { page }) as TmdbResponse<ResponseMovie>
+
+  return handleTmdbResponse(response)
 }
 
-export default Movies
+export async function search(keyword: string, page = 1): Promise<FormattedTmdbResponse<FormattedResponseMovie>> {
+  const response = await authFetch.get(getTmdbApi(`search/movie`), { 
+    page,
+    query: keyword
+  }) as TmdbResponse<ResponseMovie>
+
+  return handleTmdbResponse(response)
+}
