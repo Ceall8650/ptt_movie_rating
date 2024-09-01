@@ -19,7 +19,7 @@ function MoviePoster({ movie }: Props) {
 
 	return (
 		<>
-			<div
+			<button
 				className={`flex
           flex-col
           items-center 
@@ -27,7 +27,6 @@ function MoviePoster({ movie }: Props) {
           group
         `}
 				onClick={() => setIsModalOpened(true)}
-				role="button"
 				tabIndex={0}
 			>
 				<div className="relative mb-2">
@@ -64,7 +63,7 @@ function MoviePoster({ movie }: Props) {
 					</div>
 				</div>
 				<MoviePosterTitle title={movie.title} />
-			</div>
+			</button>
 			{isModalOpened && (
 				<MovieDetailModal
 					movie={movie}

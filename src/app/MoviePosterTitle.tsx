@@ -24,9 +24,9 @@ function getReviewMap(reviews: Review[]): ReviewMap {
 	};
 
 	reviews.forEach((review) => {
-		if (/好|爽|佳/.test(review.category?.join())) {
+		if (/好爽佳/.test(review.category?.join())) {
 			reviewMap.goods.push(review);
-		} else if (/爛|負/.test(review.category?.join())) {
+		} else if (/爛負/.test(review.category?.join())) {
 			reviewMap.bads.push(review);
 		} else if (/普/.test(review.category?.join())) {
 			reviewMap.normals.push(review);
