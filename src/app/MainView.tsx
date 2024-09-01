@@ -14,7 +14,7 @@ function MainView() {
   const movies = useAppSelector(state => state.movie.movies)
 
   useEffect(() => {
-    if (isFetched) { // Check if mounted before updating state
+    if (isFetched) { // Check if the API have been fetched
       setIsFetchEnabled(false)
     }
   }, [isFetched])
