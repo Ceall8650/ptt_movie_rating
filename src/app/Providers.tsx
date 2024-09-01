@@ -37,9 +37,9 @@ function getQueryClient() {
   }
 }
 
-function Providers({ children }: {
+function Providers({ children }: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   const queryClient = getQueryClient()
 
   return (

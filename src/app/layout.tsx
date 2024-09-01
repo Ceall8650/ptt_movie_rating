@@ -13,9 +13,9 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   const darkModeClassName = 'dark:bg-dark-mode-primary dark:text-white'
 
   return (
