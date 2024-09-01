@@ -27,10 +27,9 @@ You can get the rating of each movie that published in PTT movie group
 [Demo](https://ptt-movie-rating.vercel.app//)
 
 ## API Reference
-
 Get the fake list from https://developer.themoviedb.org/docs/getting-started
-## License
 
+## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
 
