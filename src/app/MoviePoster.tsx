@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import MoviePosterImage from "assets/images/moviePoster.svg";
 import { getImageUrl } from "common/utilities";
-import MovieDetailModal from "./MovieDetailModal";
 import MoviePosterTitle from "./MoviePosterTitle";
 
 type Props = {
@@ -12,21 +10,18 @@ type Props = {
 };
 
 function MoviePoster({ movie }: Props) {
-	const [isModalOpened, setIsModalOpened] = useState(false);
 	const imageSource = movie.posterPath
 		? getImageUrl(movie.posterPath)
 		: MoviePosterImage;
 
 	return (
-		<>
-			<button
+		<button
 				className={`flex
           flex-col
           items-center 
           hover:cursor-pointer
           group
         `}
-				onClick={() => setIsModalOpened(true)}
 				tabIndex={0}
 			>
 				<div className="relative mb-2">
@@ -63,15 +58,7 @@ function MoviePoster({ movie }: Props) {
 					</div>
 				</div>
 				<MoviePosterTitle title={movie.title} />
-			</button>
-			{isModalOpened && (
-				<MovieDetailModal
-					movie={movie}
-					imageSource={imageSource}
-					onClose={() => setIsModalOpened(false)}
-				/>
-			)}
-		</>
+		</button>
 	);
 }
 
