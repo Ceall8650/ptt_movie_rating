@@ -6,9 +6,6 @@ import {
 
 type movieState = {
   movies: FormattedResponseMovie[]|null,
-  keyword: string,
-  totalResults: number,
-  value: number
 }
 
 export const searchMovies = createAsyncThunk<
@@ -26,37 +23,29 @@ export const searchMovies = createAsyncThunk<
 
 const initialState: movieState = {
   movies: null,
-  keyword: '',
-  totalResults: 0,
-  value: 0,
 }
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    mutateKeyword(state,action:PayloadAction<string> ) {
-      state.keyword = action.payload
-    },
     mutateSearchResult(state, action:PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) {
+      console.log('action.payload.movies :>> ', action.payload.movies);
       state.movies = action.payload.movies
-      state.totalResults = action.payload.totalResults
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(searchMovies.fulfilled, (state, action: PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) => {
-        const { movies, totalResults } = action.payload
+        const { movies } = action.payload
 
         state.movies = movies
-        state.totalResults = totalResults
       })
   }
 })
 
 export const { 
   mutateSearchResult, 
-  mutateKeyword,
 } = movieSlice.actions
 
 export default movieSlice.reducer
