@@ -18,10 +18,10 @@ export default function Pagination({ total }: Props) {
   ), [firstPage, lastPage])
 
   return (
-    <div className="flex align-center px-6 justify-between">
+    <div className="flex align-center px-6 py-4 justify-between">
       <button
         disabled={!isBackEnabled}
-        className={`w-8 h-8 rounded-full ${isBackEnabled && 'dark:hover:bg-cyan-500'}`}
+        className={`w-8 h-8 rounded-full ${isBackEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}`}
         onClick={() => setPageOffset(prev => prev - 1)}
       >
         &lt;
@@ -29,14 +29,14 @@ export default function Pagination({ total }: Props) {
       {pageNumbers.map(number => (
         <button
           key={number}
-          className="w-8 h-8 rounded-full dark:hover:bg-cyan-500"
+          className="w-8 h-8 rounded-full dark:hover:bg-cyan-500 hover:bg-blue-200"
         >
           {number}
         </button>
       ))}
       <button
         disabled={!isNextEnabled}
-        className={`w-8 h-8 rounded-full ${isNextEnabled && 'dark:hover:bg-cyan-500'}`}
+        className={`w-8 h-8 rounded-full ${isNextEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}`}
         onClick={() => setPageOffset(prev => prev + 1)}
       >
         &gt;

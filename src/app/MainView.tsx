@@ -31,10 +31,7 @@ function MainView() {
   } else {
     return movies?.length
       ? <div>
-        <MovieList
-          className="mb-5"
-          movies={movies}
-        />
+        <MovieList movies={movies} />
         <Pagination total={totalPages} />
       </div>
       : <MovieEmpty />
