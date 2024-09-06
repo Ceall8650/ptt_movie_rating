@@ -37,10 +37,11 @@ function getQueryClient() {
   }
 }
 
+export const queryClient = getQueryClient()
+
 function Providers({ children }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = getQueryClient()
 
   return (
     <StoreProvider>

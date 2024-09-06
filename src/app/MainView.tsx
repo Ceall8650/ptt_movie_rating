@@ -6,12 +6,17 @@ import MovieEmpty from "@/app/MovieEmpty";
 import { useAppSelector } from "store/hooks";
 import MovieList from "./MovieList";
 import MovieSearching from "./MovieSearching";
+import Pagination from './Pagination';
 
 
 function MainView() {
   const [isFetchEnabled, setIsFetchEnabled] = useState(true)
-  const { isLoading, isRefetching, isError, isFetched } = usePopularMovies({ enabled: isFetchEnabled })
+  const { isLoading, isRefetching, isError, isFetched } = usePopularMovies({
+    enabled: isFetchEnabled,
+    page: 1
+  })
   const movies = useAppSelector(state => state.movie.movies)
+  const totalPages = useAppSelector(state => state.movie.totalPages)
 
   useEffect(() => {
     if (isFetched) { // Check if the API have been fetched
@@ -24,7 +29,15 @@ function MainView() {
   } else if (isError) {
     return <MovieEmpty />
   } else {
-    return movies?.length ? <MovieList movies={movies} /> : <MovieEmpty />
+    return movies?.length
+      ? <div>
+        <MovieList
+          className="mb-5"
+          movies={movies}
+        />
+        <Pagination total={totalPages} />
+      </div>
+      : <MovieEmpty />
   }
 }
 

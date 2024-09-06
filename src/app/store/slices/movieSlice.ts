@@ -2,21 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type movieState = {
   movies: FormattedResponseMovie[]|null,
-  totalResults: number,
+  totalPages: number,
 }
 
 const initialState: movieState = {
   movies: null,
-  totalResults: 0,
+  totalPages: 0,
 }
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
   reducers: {
-    mutateSearchResult(state, action:PayloadAction<{ movies: FormattedResponseMovie[]|null, totalResults:number }>) {
+    mutateSearchResult(state, action:PayloadAction<{ movies: FormattedResponseMovie[]|null, totalPages:number }>) {
       state.movies = action.payload.movies
-      state.totalResults = action.payload.totalResults
+      state.totalPages = action.payload.totalPages
     },
   },
 })

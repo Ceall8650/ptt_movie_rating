@@ -18,20 +18,24 @@ type Options = {
 function usePopularMovies(options?: Options) {
   const dispatch = useAppDispatch()
   const page = options?.page ?? 1
-  const enabled = options?.enabled 
+  const enabled = options?.enabled  ?? false
   const query = useQuery({
     queryKey: [popularMoviePath, page],
     enabled,
     queryFn: () => getPopularList(page),
   })
-  const { isSuccess, data, isFetching, isRefetching } = query
+  const { isSuccess, data } = query
 
   // Use useEffect to dispatch after rendering
-  useEffect(() => {
-    if (!isFetching && !isRefetching && isSuccess) {
+
+  // Must put the dispatch in the useEffect to prevent the MainView re-render while MainView is rendering
+  // app-index.js:31 Warning: Cannot update a component (`MainView`) while rendering a different component (`TopBarView`). To locate the bad setState() call inside `TopBarView`
+  useEffect(() => {    
+    console.log('useEffect :>> ');
+    if(isSuccess) {
       dispatch(mutateSearchResult({ ...data }));
     }
-  }, [isFetching, isRefetching, isSuccess, data, dispatch]);
+  }, [isSuccess, data, dispatch])
 
   return query
 }
