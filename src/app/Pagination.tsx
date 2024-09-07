@@ -2,11 +2,18 @@ import { useState, useMemo } from 'react';
 
 type Props = Readonly<{
   total: number,
-  className?: String
+  currentPage: number,
+  className?: string,
+  changePage?: Function
 }>
 const PAGE_AMOUNT = 10
 
-export default function Pagination({ total, className }: Props) {
+export default function Pagination({
+  total,
+  className,
+  currentPage,
+  changePage
+}: Props) {
   const MAX_PAGE_OFFSET = Math.ceil(total / PAGE_AMOUNT) - 1
   const [pageOffset, setPageOffset] = useState(0)
   const isBackEnabled = useMemo(() => pageOffset > 0, [pageOffset])
@@ -17,6 +24,12 @@ export default function Pagination({ total, className }: Props) {
     { length: lastPage - firstPage + 1 },
     (_, i) => firstPage + i
   ), [firstPage, lastPage])
+
+  function clickPage(pageNumber: number) {
+    if (changePage) {
+      changePage(pageNumber)
+    }
+  }
 
   return (
     <div className={`flex align-center px-6 py-4 justify-between ${className}`}>
@@ -30,7 +43,15 @@ export default function Pagination({ total, className }: Props) {
       {pageNumbers.map(number => (
         <button
           key={number}
-          className="w-8 h-8 rounded-full dark:hover:bg-cyan-500 hover:bg-blue-200"
+          className={`
+            w-8
+            h-8
+            rounded-full
+            dark:hover:bg-cyan-500
+            hover:bg-blue-200
+            ${currentPage === number && 'dark:bg-cyan-600 bg-blue-300'}
+          `}
+          onClick={() => clickPage(number)}
         >
           {number}
         </button>
