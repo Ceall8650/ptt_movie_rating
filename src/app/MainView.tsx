@@ -32,7 +32,9 @@ function MainView() {
     return movies?.length
       ? <div>
         <MovieList movies={movies} />
-        <Pagination total={totalPages} />
+        <footer className="flex justify-center">
+          <Pagination total={totalPages} className="w-[600px]" />
+        </footer>
       </div>
       : <MovieEmpty />
   }

@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react';
 
-type Props = {
-  readonly total: number
-}
+type Props = Readonly<{
+  total: number,
+  className?: String
+}>
 const PAGE_AMOUNT = 10
 
-export default function Pagination({ total }: Props) {
+export default function Pagination({ total, className }: Props) {
   const MAX_PAGE_OFFSET = Math.ceil(total / PAGE_AMOUNT) - 1
   const [pageOffset, setPageOffset] = useState(0)
   const isBackEnabled = useMemo(() => pageOffset > 0, [pageOffset])
@@ -18,7 +19,7 @@ export default function Pagination({ total }: Props) {
   ), [firstPage, lastPage])
 
   return (
-    <div className="flex align-center px-6 py-4 justify-between">
+    <div className={`flex align-center px-6 py-4 justify-between ${className}`}>
       <button
         disabled={!isBackEnabled}
         className={`w-8 h-8 rounded-full ${isBackEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}`}
