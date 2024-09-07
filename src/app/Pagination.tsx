@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 type Props = Readonly<{
   total: number,
   currentPage: number,
+  changePage: Function
   className?: string,
-  changePage?: Function
 }>
 const PAGE_AMOUNT = 10
 
@@ -26,17 +26,41 @@ export default function Pagination({
   ), [firstPage, lastPage])
 
   function clickPage(pageNumber: number) {
-    if (changePage) {
-      changePage(pageNumber)
+    changePage(pageNumber)
+  }
+
+  function backOffset() {
+    if (isBackEnabled) {
+      setPageOffset(prev => prev - 1)
+      changePage(firstPage - PAGE_AMOUNT)
     }
   }
+
+  function nextOffset() {
+    if (isNextEnabled) {
+      setPageOffset(prev => prev + 1)
+      changePage(lastPage + 1)
+    }
+  }
+
+  useEffect(() => {
+    const newPageOffset = Math.floor(currentPage / PAGE_AMOUNT)
+
+    setPageOffset(newPageOffset)
+  }, [currentPage])
 
   return (
     <div className={`flex align-center px-6 py-4 justify-between ${className}`}>
       <button
         disabled={!isBackEnabled}
-        className={`w-8 h-8 rounded-full ${isBackEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}`}
-        onClick={() => setPageOffset(prev => prev - 1)}
+        className={`
+          w-8
+          h-8
+          cursor-pointer
+          rounded-full
+          ${isBackEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}
+        `}
+        onClick={backOffset}
       >
         &lt;
       </button>
@@ -58,8 +82,14 @@ export default function Pagination({
       ))}
       <button
         disabled={!isNextEnabled}
-        className={`w-8 h-8 rounded-full ${isNextEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}`}
-        onClick={() => setPageOffset(prev => prev + 1)}
+        className={`
+          w-8
+          h-8
+          cursor-pointer
+          rounded-full
+          ${isNextEnabled && 'dark:hover:bg-cyan-500 hover:bg-blue-200'}
+        `}
+        onClick={nextOffset}
       >
         &gt;
       </button>
