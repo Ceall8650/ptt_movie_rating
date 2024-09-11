@@ -1,30 +1,29 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useLayoutEffect } from 'react';
 
 function TopBarThemeModeButton() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-  const handleDarkMode = useCallback((isDarkMode: boolean) => {
+
+  function toggleDarkMode(isDarkMode: boolean) {
     if (isDarkMode) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
     setIsDarkMode(isDarkMode)
-  }, [])
+  }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
 
-    setIsDarkMode(isSystemDark)
-    handleDarkMode(isSystemDark)
-
-  }, [handleDarkMode])
+    toggleDarkMode(isSystemDark)
+  }, [])
 
   return (
-    <div
+    <button
       className={`theme-mode-button-wrapper${isDarkMode ? ' darkMode' : ''}`}
-      onClick={() => handleDarkMode(!isDarkMode)}
+      onClick={() => toggleDarkMode(!isDarkMode)}
     >
       <div className="theme-mode-button">
         <div className="theme-mode-light">
@@ -40,7 +39,7 @@ function TopBarThemeModeButton() {
           />
         </div>
       </div>
-    </div>
+    </button>
   )
 }
 

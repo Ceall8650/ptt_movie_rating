@@ -11,7 +11,7 @@ const PAGE_AMOUNT = 10
 export default function Pagination({
   total,
   className,
-  currentPage,
+  currentPage = 1,
   changePage
 }: Props) {
   const MAX_PAGE_OFFSET = Math.ceil(total / PAGE_AMOUNT) - 1

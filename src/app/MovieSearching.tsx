@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import SearchingImage from 'assets/images/searching.svg';
 
-type Props = {
-  readonly className?: string // Marked as read-only
-}
+type Props = Readonly<{
+  className?: string // Marked as read-only
+}>
 
-function MovieSearching({ className }: Readonly<Props>) {
+function MovieSearching({ className }: Props) {
   let rootClassName = "w-full h-full flex flex-col justify-center items-center"
 
   if(className) {

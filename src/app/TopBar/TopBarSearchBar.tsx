@@ -23,7 +23,6 @@ function TopBarSearchBar({ className }: Props) {
   }
 
   useEffect(() => {
-    console.log('searchTriggered', searchTriggered)
     if (searchTriggered && !isFetching) {
       refetch();
       setSearchTriggered(false)

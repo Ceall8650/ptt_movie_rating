@@ -1,16 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { usePopularMovies } from 'services/hooks/useMovies';
-import MovieEmpty from "@/app/MovieEmpty";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { changePage } from 'store/slices/movieSlice';
 import MovieList from "./MovieList";
-import MovieSearching from "./MovieSearching";
 import Pagination from './Pagination';
 
+type Prop = Readonly<{
+  emptyComponent: React.ReactNode;
+  movieSearchingComponent: React.ReactNode;
+}>
 
-function MainView() {
+function MainView({
+  emptyComponent,
+  movieSearchingComponent
+}: Prop) {
   const [isFetchEnabled, setIsFetchEnabled] = useState(true)
   const currentPage = useAppSelector(state => state.movie.currentPage)
   const { isLoading, isRefetching, isError, isFetched } = usePopularMovies({
@@ -28,9 +33,9 @@ function MainView() {
   }, [isFetched])
 
   if (isLoading || isRefetching) {
-    return <MovieSearching />;
+    return <>{movieSearchingComponent}</>;
   } else if (isError) {
-    return <MovieEmpty />
+    return <>{emptyComponent}</>
   } else {
     return movies?.length
       ? <div>
@@ -44,7 +49,7 @@ function MainView() {
           />
         </footer>
       </div>
-      : <MovieEmpty />
+      : <>{emptyComponent}</>
   }
 }
 
