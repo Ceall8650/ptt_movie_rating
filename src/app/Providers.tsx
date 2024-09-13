@@ -7,6 +7,7 @@ import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
+import { ThemeProvider } from 'next-themes'
 import StoreProvider from './store/StoreProvider';
 
 function makeQueryClient() {
@@ -44,11 +45,13 @@ function Providers({ children }: Readonly<{
 }>) {
 
   return (
-    <StoreProvider>
-      <QueryClientProvider client={queryClient}>
-        {children}
-      </QueryClientProvider>
-    </StoreProvider>
+    <ThemeProvider>
+      <StoreProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
+      </StoreProvider>
+    </ThemeProvider>
   )
 }
 

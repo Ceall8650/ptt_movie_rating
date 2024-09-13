@@ -1,30 +1,17 @@
 'use client'
 
-import { useState, useLayoutEffect } from 'react';
+import { useTheme } from 'next-themes'
+import ThemeMode from '@/app/enums/ThemeMode'
 
 function TopBarThemeModeButton() {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
-
-  function toggleDarkMode(isDarkMode: boolean) {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    setIsDarkMode(isDarkMode)
-  }
-
-  useLayoutEffect(() => {
-    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-    toggleDarkMode(isSystemDark)
-  }, [])
+  const { theme, setTheme } = useTheme()
 
   return (
     <button
-      className={`theme-mode-button-wrapper${isDarkMode ? ' darkMode' : ''}`}
-      onClick={() => toggleDarkMode(!isDarkMode)}
+      className='theme-mode-button-wrapper'
+      onClick={() => setTheme(theme === ThemeMode.DARK ? ThemeMode.LIGHT : ThemeMode.DARK)}
     >
+
       <div className="theme-mode-button">
         <div className="theme-mode-light">
           <i

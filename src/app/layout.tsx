@@ -20,14 +20,17 @@ export default function RootLayout({
 
   return (
     <html
+      // Add `suppressHydrationWarning` prevent the warning in console because of the next-theme
+      // Based on: https://github.com/pacocoursey/next-themes/tree/main?tab=readme-ov-file#with-app
+      suppressHydrationWarning
       lang="en"
       className={inter.className}
     >
       <body
-        className={`${inter.className} ${darkModeClassName}`}
         // Add `suppressHydrationWarning` prevent the warning in console because of the chrome extensions
         // Based on: https://stackoverflow.com/a/75339011 
-        suppressHydrationWarning={true}
+        suppressHydrationWarning
+        className={`${inter.className} ${darkModeClassName}`}
       >
         <Providers>
             {children}
