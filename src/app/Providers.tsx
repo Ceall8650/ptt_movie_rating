@@ -45,7 +45,7 @@ function Providers({ children }: Readonly<{
 }>) {
 
   return (
-    <ThemeProvider>
+    <ThemeProvider attribute="class">
       <StoreProvider>
         <QueryClientProvider client={queryClient}>
           {children}

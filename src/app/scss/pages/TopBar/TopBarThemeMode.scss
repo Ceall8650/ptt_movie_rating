@@ -46,7 +46,7 @@
 
 /* Dark mode */
 
-[data-theme="dark"] .theme-mode-button-wrapper {
+.dark .theme-mode-button-wrapper {
 	@apply dark:bg-dark-mode-primary;
 	@apply transition-colors;
 	@apply duration-300;
