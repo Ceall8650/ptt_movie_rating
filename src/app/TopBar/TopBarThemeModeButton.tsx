@@ -1,7 +1,5 @@
-'use client'
-
 import { useTheme } from 'next-themes'
-import ThemeMode from '@/app/enums/ThemeMode'
+import THEME_MODE from '@/app/enums/ThemeMode'
 
 function TopBarThemeModeButton() {
   const { theme, setTheme } = useTheme()
@@ -9,7 +7,8 @@ function TopBarThemeModeButton() {
   return (
     <button
       className='theme-mode-button-wrapper'
-      onClick={() => setTheme(theme === ThemeMode.DARK ? ThemeMode.LIGHT : ThemeMode.DARK)}
+      onClick={() => setTheme(theme === THEME_MODE.DARK ? THEME_MODE.LIGHT : THEME_MODE.DARK)}
+      aria-label={`Switch to ${theme === THEME_MODE.LIGHT ? 'light' : 'dark'} mode`}
     >
 
       <div className="theme-mode-button">

@@ -40,6 +40,11 @@ function getQueryClient() {
 
 export const queryClient = getQueryClient()
 
+// Display the system theme whenever the page is opened
+if (typeof window !== 'undefined') {
+  localStorage.setItem('theme', 'system')
+}
+
 function Providers({ children }: Readonly<{
   children: React.ReactNode
 }>) {

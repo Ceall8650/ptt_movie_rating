@@ -1,6 +1,7 @@
 enum ThemeMode {
   LIGHT = 'light',
-  DARK = 'dark'
+  DARK = 'dark',
+  SYSTEM = 'system'
 }
 
 export default ThemeMode

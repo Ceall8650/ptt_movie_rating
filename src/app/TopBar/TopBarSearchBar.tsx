@@ -1,5 +1,3 @@
-'use client'
-
 import { KeyboardEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useSearchingMovies } from 'services/hooks/useMovies';
 import InputText from 'components/Input/InputText';
