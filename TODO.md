@@ -41,7 +41,7 @@ Workflow:
     - [X] Display the search icon before the API is finished
     - [x] Loading all movies with `API`
     - [x] Display the movie with the pic and name
-    - [ ] Display the pagination
+    - [x] Display the pagination
 
 ## Search
 - Searching 
@@ -53,5 +53,4 @@ Workflow:
   - [X] Display the movies matched the keyword
 
 FIXME:
-- When the page is dark mode, it should not be opened from the light mode while page loading
 - The movie poster has different heights
