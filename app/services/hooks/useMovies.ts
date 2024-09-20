@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { useAppDispatch } from "store/hooks";
+import { useAppDispatch } from "../../store/hooks";
 import {
   popularMoviePath,
   movieSearchPath,
   getPopularList,
   search
-} from 'services/Movies'
-import { mutateSearchResult } from 'store/slices/movieSlice';
+} from '../Movies'
+import { mutateSearchResult } from '../../store/slices/movieSlice';
 
 type Options = {
   keyword?: string, 

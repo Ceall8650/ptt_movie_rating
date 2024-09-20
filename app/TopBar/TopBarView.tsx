@@ -3,11 +3,11 @@
 import {
 	popularMoviePath,
 	getPopularList,
-} from 'services/Movies'
-import { mutateSearchResult } from 'store/slices/movieSlice';
-import { changePage } from 'store/slices/movieSlice';
-import { queryClient } from 'app/Providers';
-import { useAppDispatch } from "store/hooks";
+} from '../services/Movies'
+import { mutateSearchResult } from '../store/slices/movieSlice';
+import { changePage } from '../store/slices/movieSlice';
+import { queryClient } from '../Providers';
+import { useAppDispatch } from "../store/hooks";
 import TopBarSearchBar from "./TopBarSearchBar";
 import TopBarThemeModeButton from "./TopBarThemeModeButton";
 

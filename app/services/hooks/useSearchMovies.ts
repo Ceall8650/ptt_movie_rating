@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useAppDispatch } from "store/hooks";
-import authFetch from 'services/utilities/authFetch';
-import { getTmdbApi } from 'services/utilities/apiPath';
-import { handleTmdbResponse } from 'services/utilities/movie';
-import { mutateSearchResult } from 'store/slices/movieSlice';
+import { useAppDispatch } from "../../store/hooks";
+import authFetch from '../utilities/authFetch';
+import { getTmdbApi } from '../utilities/apiPath';
+import { handleTmdbResponse } from '../utilities/movie';
+import { mutateSearchResult } from '../../store/slices/movieSlice';
 import { useEffect } from 'react';
 
 const path = getTmdbApi('search/movie')

@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import REVIEW from "services/Review";
+import REVIEW from "./services/Review";
 import Image from "next/image";
 import LikeImage from "assets/images/like.png";
 

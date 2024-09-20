@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { usePopularMovies } from 'services/hooks/useMovies';
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { changePage } from 'store/slices/movieSlice';
+import { usePopularMovies } from './services/hooks/useMovies';
+import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { changePage } from './store/slices/movieSlice';
 import MovieList from "./MovieList";
 import Pagination from './Pagination';
 

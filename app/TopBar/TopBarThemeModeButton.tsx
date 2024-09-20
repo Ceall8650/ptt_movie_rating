@@ -1,5 +1,5 @@
 import { useTheme } from 'next-themes'
-import THEME_MODE from '@/app/enums/ThemeMode'
+import THEME_MODE from '../enums/ThemeMode'
 
 function TopBarThemeModeButton() {
   const { theme, setTheme } = useTheme()

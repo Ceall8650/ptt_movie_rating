@@ -1,6 +1,6 @@
 import { KeyboardEvent, useState, ChangeEvent, useEffect } from 'react';
-import { useSearchingMovies } from 'services/hooks/useMovies';
-import InputText from 'components/Input/InputText';
+import { useSearchingMovies } from '../services/hooks/useMovies';
+import InputText from '../components/Input/InputText';
 
 type Props = Readonly<{
   className?: string,

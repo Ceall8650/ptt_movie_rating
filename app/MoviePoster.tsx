@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import MoviePosterImage from "assets/images/moviePoster.svg";
-import { getImageUrl } from "common/utilities";
+import { getImageUrl } from "./common/utilities";
 import MoviePosterTitle from "./MoviePosterTitle";
 
 type Props = {
@@ -21,7 +21,7 @@ function MoviePoster({ movie }: Props) {
           flex-col
           items-center 
         `}
-			>
+		>
 			<div className="relative mb-2 hover:cursor-pointer group">
 				<Image
 					src={imageSource}

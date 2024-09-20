@@ -1,4 +1,4 @@
-import MovieEmpty from "@/app/MovieEmpty";
+import MovieEmpty from "./MovieEmpty";
 import TopBarView from "./TopBar/TopBarView";
 import MainView from './MainView';
 import MovieSearching from "./MovieSearching";
