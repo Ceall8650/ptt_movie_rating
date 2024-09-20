@@ -49,7 +49,7 @@ async function getAllDiscussion(maxPageNumber:number, keyword:string) {
         if(Number.isNaN(convertedNrec)) {
           if(nrec === '爆') {
             convertedNrec = 100
-          } else if(/[X].*/.test(nrec)){
+          } else if(/X.*/.test(nrec)){
             const [_, times] = nrec.split('X') 
 
             convertedNrec = -(Number(times)*10 )
@@ -59,7 +59,7 @@ async function getAllDiscussion(maxPageNumber:number, keyword:string) {
         }
 
         return {
-          category: $(item).find('.title').text().match(/(\[|\［)(.*?)(\]|\］)/g), 
+          category: $(item).find('.title').text().match(/(\[［)(.*?)(\]］)/g), 
           nrec: convertedNrec,
           title: $(item).find('.title').text().trim(),
           author: $(item).find('.author').text().trim(),
@@ -76,7 +76,7 @@ async function getAllDiscussion(maxPageNumber:number, keyword:string) {
 
 
 export async function GET(req: NextRequest) {
-  const params = await req.nextUrl.searchParams
+  const params = req.nextUrl.searchParams
   const movie = params.get('movie');
 
   if(!movie) {
