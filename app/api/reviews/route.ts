@@ -59,7 +59,7 @@ async function getAllDiscussion(maxPageNumber:number, keyword:string) {
         }
 
         return {
-          category: $(item).find('.title').text().match(/(\[［)(.*?)(\]］)/g), 
+          category: $(item).find('.title').text().match(/(\[|［)(.*?)(\]|］)/g), 
           nrec: convertedNrec,
           title: $(item).find('.title').text().trim(),
           author: $(item).find('.author').text().trim(),
