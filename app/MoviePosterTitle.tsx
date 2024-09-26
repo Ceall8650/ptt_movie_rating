@@ -60,9 +60,10 @@ function MoviePoster({ title }: Props) {
 		return Math.round((reviewMap.goods.length / availableReviewAmount) * 100);
 	}, [reviewMap]);
 
-	useEffect(() => {
-		fetchReviews();
-	}, [fetchReviews]);
+	// TODO: Uncomment this after the PTT server is ready
+	// useEffect(() => {
+	// 	fetchReviews();
+	// }, [fetchReviews]);
 
 	const ImageComponent = ratingRatio >= RECOMMENDED_THRESHOLD && (
 		<Image

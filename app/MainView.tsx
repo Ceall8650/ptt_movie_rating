@@ -1,9 +1,18 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { usePopularMovies } from './services/hooks/useMovies';
+import { useEffect } from 'react'
+import {
+  popularMoviePath,
+  getPopularList,
+} from 'services/Movies'
+import {
+  mutateSearchResult,
+  mutateMovieMode,
+  changePage
+} from 'store/slices/movieSlice';
+import { useQuery } from '@tanstack/react-query';
+import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { changePage } from './store/slices/movieSlice';
 import MovieList from "./MovieList";
 import Pagination from './Pagination';
 
@@ -16,21 +25,26 @@ function MainView({
   emptyComponent,
   movieSearchingComponent
 }: Prop) {
-  const [isFetchEnabled, setIsFetchEnabled] = useState(true)
-  const currentPage = useAppSelector(state => state.movie.currentPage)
-  const { isLoading, isRefetching, isError, isFetched } = usePopularMovies({
-    enabled: isFetchEnabled,
-    page: currentPage
-  })
   const dispatch = useAppDispatch()
+  const currentPage = useAppSelector(state => state.movie.currentPage)
   const movies = useAppSelector(state => state.movie.movies)
+  const mode = useAppSelector(state => state.movie.mode)
   const totalPages = useAppSelector(state => state.movie.totalPages)
+  const { isSuccess, data, isLoading, isRefetching, isError } = useQuery({
+    enabled: mode === MovieMode.POPULAR,
+    queryKey: [popularMoviePath, currentPage],
+    queryFn: () => getPopularList(currentPage),
+  })
 
+  // Use useEffect to dispatch after rendering
+  // Must put the dispatch in the useEffect to prevent the MainView re-render while MainView is rendering
+  // app-index.js:31 Warning: Cannot update a component (`MainView`) while rendering a different component (`TopBarView`). To locate the bad setState() call inside `TopBarView`
   useEffect(() => {
-    if (isFetched) { // Check if the API have been fetched
-      setIsFetchEnabled(false)
+    if (isSuccess && mode === MovieMode.POPULAR) {
+      dispatch(mutateSearchResult({ ...data }));
+      dispatch(mutateMovieMode({ mode: MovieMode.POPULAR }))
     }
-  }, [isFetched])
+  }, [isSuccess, data, mode, dispatch])
 
   if (isLoading || isRefetching) {
     return <>{movieSearchingComponent}</>;

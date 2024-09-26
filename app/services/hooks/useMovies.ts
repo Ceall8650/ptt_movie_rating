@@ -1,40 +1,21 @@
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { useAppDispatch } from "../../store/hooks";
+import { useAppDispatch } from "store/hooks";
 import {
-  popularMoviePath,
   movieSearchPath,
-  getPopularList,
   search
 } from '../Movies'
-import { mutateSearchResult } from '../../store/slices/movieSlice';
+import { 
+  mutateSearchResult, 
+  mutateMovieMode 
+} from 'store/slices/movieSlice';
+import MovieMode from 'enums/MovieMode';
 
 type Options = {
   keyword?: string, 
   page?: number,
   enabled?: boolean
 } 
-
-function usePopularMovies(options?: Options) {
-  const dispatch = useAppDispatch()
-  const page = options?.page ?? 1
-  const query = useQuery({
-    queryKey: [popularMoviePath, page],
-    queryFn: () => getPopularList(page),
-  })
-  const { isSuccess, data } = query
-  // Use useEffect to dispatch after rendering
-
-  // Must put the dispatch in the useEffect to prevent the MainView re-render while MainView is rendering
-  // app-index.js:31 Warning: Cannot update a component (`MainView`) while rendering a different component (`TopBarView`). To locate the bad setState() call inside `TopBarView`
-  useEffect(() => {    
-    if(isSuccess) {
-      dispatch(mutateSearchResult({ ...data }));
-    }
-  }, [isSuccess, data, dispatch])
-
-  return query
-}
 
 function useSearchingMovies(options?: Options) {
   const dispatch = useAppDispatch()
@@ -50,8 +31,9 @@ function useSearchingMovies(options?: Options) {
 
   // Use useEffect to dispatch after rendering
   useEffect(() => {
-    if (!isRefetching && isSuccess) {
+    if (isSuccess && !isRefetching) {
       dispatch(mutateSearchResult({ ...data }));
+      dispatch(mutateMovieMode({ mode: MovieMode.SEARCH }))
     }
   }, [isRefetching, isSuccess, data, dispatch]);
 
@@ -59,6 +41,5 @@ function useSearchingMovies(options?: Options) {
 }
 
 export {
-  usePopularMovies,
   useSearchingMovies
 }

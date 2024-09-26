@@ -1,6 +1,9 @@
 import { KeyboardEvent, useState, ChangeEvent, useEffect } from 'react';
-import { useSearchingMovies } from '../services/hooks/useMovies';
-import InputText from '../components/Input/InputText';
+import { useAppSelector, useAppDispatch } from 'store/hooks';
+import MovieMode from 'enums/MovieMode';
+import { useSearchingMovies } from 'services/hooks/useMovies';
+import InputText from 'components/Input/InputText';
+import { mutateMovieMode, changePage } from 'store/slices/movieSlice'
 
 type Props = Readonly<{
   className?: string,
@@ -9,14 +12,24 @@ type Props = Readonly<{
 function TopBarSearchBar({ className }: Props) {
   const [keyword, setKeyword] = useState('')
   const [searchTriggered, setSearchTriggered] = useState(false)
+  const dispatch = useAppDispatch()
+  const mode = useAppSelector(state => state.movie.mode)
+  const page = useAppSelector(state => state.movie.currentPage)
   const { isFetching, refetch } = useSearchingMovies({
     keyword,
-    enabled: false
+    page,
+    enabled: mode === MovieMode.SEARCH
   })
+
+  function search() {
+    dispatch(changePage({ pageNumber: 1 }))
+    dispatch(mutateMovieMode({ mode: MovieMode.SEARCH }))
+    setSearchTriggered(true)
+  }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
-      setSearchTriggered(true)
+      search()
     }
   }
 
@@ -39,7 +52,7 @@ function TopBarSearchBar({ className }: Props) {
       <i
         aria-hidden="true"
         className="icon-search dib text-2xl cursor-pointer"
-        onClick={() => setSearchTriggered(true)}
+        onClick={search}
       />
     </div>
   )
