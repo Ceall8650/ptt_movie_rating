@@ -1,11 +1,11 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import REVIEW from "./services/Review";
+import { useMemo } from "react";
 import Image from "next/image";
 import LikeImage from "assets/images/like.png";
 
 type Props = Readonly<{
 	title: string;
+	reviews: Review[];
 }>;
 
 type ReviewMap = {
@@ -37,15 +37,11 @@ function getReviewMap(reviews: Review[]): ReviewMap {
 
 	return reviewMap;
 }
+const RECOMMENDED_THRESHOLD = 70;
 
-function MoviePoster({ title }: Props) {
-	const RECOMMENDED_THRESHOLD = 70;
-	const [reviewMap, setReviewMap] = useState<null | ReviewMap>(null);
-	const fetchReviews = useCallback(async () => {
-		const reviews = await REVIEW.getAll(title);
 
-		setReviewMap(getReviewMap(reviews));
-	}, [title]);
+function MoviePosterTitle({ title, reviews }: Props) {
+	const reviewMap = getReviewMap(reviews);
 	const ratingRatio = useMemo(() => {
 		if (!reviewMap) {
 			return NaN;
@@ -59,11 +55,6 @@ function MoviePoster({ title }: Props) {
 
 		return Math.round((reviewMap.goods.length / availableReviewAmount) * 100);
 	}, [reviewMap]);
-
-	// TODO: Uncomment this after the PTT server is ready
-	// useEffect(() => {
-	// 	fetchReviews();
-	// }, [fetchReviews]);
 
 	const ImageComponent = ratingRatio >= RECOMMENDED_THRESHOLD && (
 		<Image
@@ -81,4 +72,4 @@ function MoviePoster({ title }: Props) {
 	);
 }
 
-export default MoviePoster;
+export default MoviePosterTitle;
