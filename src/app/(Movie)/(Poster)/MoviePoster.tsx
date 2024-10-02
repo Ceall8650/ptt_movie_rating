@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import REVIEW from "./services/Review";
+import REVIEW from "../../../services/Review";
 import MoviePosterTitle from "./MoviePosterTitle";
 import MoviePosterImage from "./MoviePosterImage";
 

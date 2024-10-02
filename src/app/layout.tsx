@@ -1,5 +1,5 @@
 import { Inter } from 'next/font/google'
-import './scss/app.scss'
+import 'scss/app.scss'
 import Providers from './Providers';
 
 const inter = Inter({
@@ -33,7 +33,7 @@ export default function RootLayout({
         className={`${inter.className} ${darkModeClassName}`}
       >
         <Providers>
-            {children}
+          {children}
         </Providers>
       </body>
     </html>

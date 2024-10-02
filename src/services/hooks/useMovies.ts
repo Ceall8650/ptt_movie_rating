@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query';
-import { useAppDispatch } from "store/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import {
   movieSearchPath,
   search
@@ -8,7 +8,7 @@ import {
 import { 
   mutateSearchResult, 
   mutateMovieMode 
-} from 'store/slices/movieSlice';
+} from '@/store/slices/movieSlice';
 import MovieMode from 'enums/MovieMode';
 
 type Options = {

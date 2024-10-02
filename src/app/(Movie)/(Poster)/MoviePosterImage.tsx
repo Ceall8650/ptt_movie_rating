@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import MovieDefaultPoster from "assets/images/movieDefaultPoster.svg";
-import { getImageUrl } from "./common/utilities";
+import { getImageUrl } from "../../../common/utilities";
 
 type Props = {
 	readonly movie: FormattedResponseMovie;

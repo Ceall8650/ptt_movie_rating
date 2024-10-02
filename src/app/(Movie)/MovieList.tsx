@@ -1,4 +1,4 @@
-import MoviePoster from "./MoviePoster";
+import MoviePoster from "./(Poster)/MoviePoster";
 
 type Props = Readonly<{
 	movies: FormattedResponseMovie[];

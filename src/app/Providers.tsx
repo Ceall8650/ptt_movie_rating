@@ -8,7 +8,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { ThemeProvider } from 'next-themes'
-import StoreProvider from './store/StoreProvider';
+import StoreProvider from './(Provider)/ProviderStore';
 
 function makeQueryClient() {
   return new QueryClient({

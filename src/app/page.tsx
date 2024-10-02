@@ -1,7 +1,7 @@
-import MovieEmpty from "./MovieEmpty";
-import TopBarView from "./TopBar/TopBarView";
-import MainView from './MainView';
-import MovieSearching from "./MovieSearching";
+import MovieEmpty from "./(Movie)/MovieEmpty";
+import TopBarView from "./(TopBar)/TopBarView";
+import MainView from './(Movie)/MainView';
+import MovieSearching from "./(Movie)/MovieSearching";
 
 function Home() {
 	return (

@@ -9,12 +9,12 @@ import {
   mutateSearchResult,
   mutateMovieMode,
   changePage
-} from 'store/slices/movieSlice';
+} from '@/store/slices/movieSlice';
 import { useQuery } from '@tanstack/react-query';
 import MovieMode from 'enums/MovieMode';
-import { useAppDispatch, useAppSelector } from "./store/hooks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import Pagination from 'app/Pagination';
 import MovieList from "./MovieList";
-import Pagination from './Pagination';
 
 type Prop = Readonly<{
   emptyComponent: React.ReactNode;
