@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import REVIEW from "../../../services/Review";
+import REVIEW, { reviewPath } from "services/Review";
+import { useQuery } from '@tanstack/react-query';
 import MoviePosterTitle from "./MoviePosterTitle";
 import MoviePosterImage from "./MoviePosterImage";
 
@@ -11,21 +12,16 @@ type Props = {
 
 function MoviePoster({ movie }: Props) {
 	const [reviews, setReviews] = useState<Review[]>([]);
+	const { data, isLoading, isError } = useQuery({
+		queryKey: [reviewPath, movie.title],
+		queryFn: ({ signal }) => REVIEW.getAll(movie.title, { signal }),
+	})
 
 	useEffect(() => {
-		let ignore = false
-
-		async function fetchReviews() {
-			const reviews = await REVIEW.getAll(movie.title);
-			if (ignore) return
-			setReviews(reviews);
+		if (!isLoading && !isError && data) {
+			setReviews(data);
 		}
-		fetchReviews();
-
-		return () => {
-			ignore = true
-		}
-	}, [movie.title]);
+	}, [data, isLoading, isError])
 
 	return (
 		<div
