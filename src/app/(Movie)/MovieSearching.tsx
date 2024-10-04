@@ -2,7 +2,7 @@ import Image from 'next/image';
 import SearchingImage from 'assets/images/searching.svg';
 
 type Props = Readonly<{
-  className?: string // Marked as read-only
+  className?: string
 }>
 
 function MovieSearching({ className }: Props) {

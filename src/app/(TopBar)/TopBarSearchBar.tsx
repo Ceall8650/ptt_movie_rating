@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState, ChangeEvent, useEffect } from 'react';
+import { KeyboardEvent, useState, ChangeEvent, useEffect, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import MovieMode from 'enums/MovieMode';
 import { useSearchingMovies } from 'services/hooks/useMovies';
@@ -15,10 +15,11 @@ function TopBarSearchBar({ className }: Props) {
   const dispatch = useAppDispatch()
   const mode = useAppSelector(state => state.movie.mode)
   const page = useAppSelector(state => state.movie.currentPage)
-  const { isFetching, refetch } = useSearchingMovies({
+  const currentPage = useRef(page)
+  const { isFetching } = useSearchingMovies({
     keyword,
     page,
-    enabled: mode === MovieMode.SEARCH
+    enabled: mode === MovieMode.SEARCH && searchTriggered
   })
 
   function search() {
@@ -34,11 +35,17 @@ function TopBarSearchBar({ className }: Props) {
   }
 
   useEffect(() => {
-    if (searchTriggered && !isFetching) {
-      refetch();
+    if (currentPage.current !== page) {
+      setSearchTriggered(true)
+      currentPage.current = page
+    }
+  }, [page])
+
+  useEffect(() => {
+    if (searchTriggered) {
       setSearchTriggered(false)
     }
-  }, [searchTriggered, isFetching, refetch])
+  }, [searchTriggered])
 
   return (
     <div className={`${className} ${isFetching ? 'bg-gray-100 dark:bg-dark-mode-primary dark:opacity-70 cursor-not-allowed' : ''} w-[300px] flex justify-between border border-slate-300 rounded-lg px-3`}>

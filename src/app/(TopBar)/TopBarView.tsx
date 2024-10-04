@@ -17,7 +17,6 @@ type Props = Readonly<{
 
 function TopBarView({ className }: Props) {
 	const dispatch = useAppDispatch()
-	const mode = useAppSelector(state => state.movie.mode)
 	const rootClassName = `fixed top-0 left-0 z-topBar w-full bg-white dark:bg-dark-mode-primary flex justify-between px-6 py-4 drop-shadow-lg`;
 
 	async function getPopularMovies() {

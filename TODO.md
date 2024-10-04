@@ -45,7 +45,7 @@ Workflow:
 
 ## Search
 - Searching 
-  - [X] Display the search icon
+  - [X] Display the searching image
 - Match the keyword
   - [X] Display "No result found" image
   - [X] Show a prompt message below the image
