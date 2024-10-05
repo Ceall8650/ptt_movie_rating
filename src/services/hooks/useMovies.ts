@@ -14,7 +14,8 @@ import MovieMode from 'enums/MovieMode';
 type Options = {
   keyword?: string, 
   page?: number,
-  enabled?: boolean
+  enabled?: boolean,
+  mode?: string
 } 
 
 function useSearchingMovies(options?: Options) {
@@ -22,8 +23,9 @@ function useSearchingMovies(options?: Options) {
   const page = options?.page ?? 1
   const keyword = options?.keyword ?? ''
   const enabled = options?.enabled ?? true
+  const mode = options?.mode ?? ''
   const query = useQuery({
-    queryKey: [movieSearchPath, page, keyword],
+    queryKey: [movieSearchPath, page, keyword, mode],
     enabled: enabled && !!keyword,
     queryFn: () => search(keyword, page),
   })

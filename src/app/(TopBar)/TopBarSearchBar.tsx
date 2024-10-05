@@ -16,9 +16,11 @@ function TopBarSearchBar({ className }: Props) {
   const mode = useAppSelector(state => state.movie.mode)
   const page = useAppSelector(state => state.movie.currentPage)
   const currentPage = useRef(page)
+  const enabled = mode === MovieMode.SEARCH && searchTriggered
   const { isFetching } = useSearchingMovies({
     keyword,
     page,
+    mode,
     enabled: mode === MovieMode.SEARCH && searchTriggered
   })
 
@@ -39,13 +41,13 @@ function TopBarSearchBar({ className }: Props) {
       setSearchTriggered(true)
       currentPage.current = page
     }
-  }, [page])
+  }, [page, enabled])
 
   useEffect(() => {
     if (searchTriggered) {
       setSearchTriggered(false)
     }
-  }, [searchTriggered])
+  }, [searchTriggered, enabled])
 
   return (
     <div className={`${className} ${isFetching ? 'bg-gray-100 dark:bg-dark-mode-primary dark:opacity-70 cursor-not-allowed' : ''} w-[300px] flex justify-between border border-slate-300 rounded-lg px-3`}>
