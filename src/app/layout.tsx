@@ -1,6 +1,8 @@
 import { Inter } from 'next/font/google'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import 'scss/app.scss'
 import Providers from './Providers';
+
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,6 +36,7 @@ export default function RootLayout({
       >
         <Providers>
           {children}
+          <ReactQueryDevtools initialIsOpen={false} />
         </Providers>
       </body>
     </html>
