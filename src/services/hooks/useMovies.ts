@@ -4,7 +4,7 @@ import { useAppDispatch } from "@/store/hooks";
 import {
   movieSearchPath,
   search
-} from '../Movies'
+} from 'services/Movies'
 import { 
   mutateSearchResult, 
   mutateMovieMode 
@@ -25,7 +25,7 @@ function useSearchingMovies(options?: Options) {
   const enabled = options?.enabled ?? true
   const mode = options?.mode ?? ''
   const query = useQuery({
-    queryKey: [movieSearchPath, page, keyword, mode],
+    queryKey: [movieSearchPath, { page, keyword, mode }],
     enabled: enabled && !!keyword,
     queryFn: () => search(keyword, page),
   })

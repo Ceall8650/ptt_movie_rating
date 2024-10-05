@@ -6,7 +6,7 @@ type movieState = {
   movies: FormattedResponseMovie[]|null,
   totalPages: number,
   currentPage: number,
-  
+  keyword: string,
 }
 
 const initialState: movieState = {
@@ -14,6 +14,7 @@ const initialState: movieState = {
   movies: null,
   totalPages: 0,
   currentPage: 1,
+  keyword: '',
 }
 
 const movieSlice = createSlice({
@@ -30,12 +31,16 @@ const movieSlice = createSlice({
     changePage(state, action:PayloadAction<{ pageNumber:number }>) {
       state.currentPage = action.payload.pageNumber
     },
-  },
+    mutateKeyword(state, action:PayloadAction<{ keyword: string }>) {
+      state.keyword = action.payload.keyword
+    },
+  },  
 })
 
 export const { 
   mutateMovieMode,
   mutateSearchResult,
+  mutateKeyword,
   changePage,
 } = movieSlice.actions
 

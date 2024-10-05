@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import MovieMode from 'enums/MovieMode';
 import { useSearchingMovies } from 'services/hooks/useMovies';
 import InputText from 'components/Input/InputText';
-import { mutateMovieMode, changePage } from '@/store/slices/movieSlice'
+import { mutateMovieMode, changePage, mutateKeyword } from '@/store/slices/movieSlice'
 
 type Props = Readonly<{
   className?: string,
@@ -28,6 +28,7 @@ function TopBarSearchBar({ className }: Props) {
     dispatch(changePage({ pageNumber: 1 }))
     dispatch(mutateMovieMode({ mode: MovieMode.SEARCH }))
     setSearchTriggered(true)
+    dispatch(mutateKeyword({ keyword }))
   }
 
   function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {

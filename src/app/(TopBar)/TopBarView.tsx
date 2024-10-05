@@ -1,13 +1,8 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppDispatch } from "store/hooks";
 import MovieMode from 'enums/MovieMode';
-import { changePage, mutateSearchResult, mutateMovieMode } from 'store/slices/movieSlice';
-import {
-	popularMoviePath,
-	getPopularList,
-} from 'services/Movies'
-import { queryClient } from '../Providers';
+import { changePage, mutateMovieMode } from 'store/slices/movieSlice';
 import TopBarSearchBar from "./TopBarSearchBar";
 import TopBarThemeModeButton from "./TopBarThemeModeButton";
 
@@ -19,21 +14,9 @@ function TopBarView({ className }: Props) {
 	const dispatch = useAppDispatch()
 	const rootClassName = `fixed top-0 left-0 z-topBar w-full bg-white dark:bg-dark-mode-primary flex justify-between px-6 py-4 drop-shadow-lg`;
 
-	async function getPopularMovies() {
-		try {
-			const DEFAULT_PAGE = 1
-			// Fetch data from the query client and return the cached data if it exists
-			const data = await queryClient.fetchQuery({
-				queryKey: [popularMoviePath, DEFAULT_PAGE],
-				queryFn: () => getPopularList(DEFAULT_PAGE)
-			})
-
-			dispatch(mutateMovieMode({ mode: MovieMode.POPULAR }))
-			dispatch(mutateSearchResult({ ...data }))
-			dispatch(changePage({ pageNumber: DEFAULT_PAGE }))
-		} catch (error) {
-			console.error(error)
-		}
+	function getPopularMovies() {
+		dispatch(mutateMovieMode({ mode: MovieMode.POPULAR }))
+		dispatch(changePage({ pageNumber: 1 }))
 	}
 
 	return (

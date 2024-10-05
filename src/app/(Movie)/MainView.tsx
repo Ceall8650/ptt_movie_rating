@@ -3,14 +3,14 @@
 import { useEffect } from 'react'
 import {
   popularMoviePath,
+  movieSearchPath,
   getPopularList,
 } from 'services/Movies'
 import {
   mutateSearchResult,
-  mutateMovieMode,
   changePage
 } from '@/store/slices/movieSlice';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useIsFetching } from '@tanstack/react-query'
 import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import Pagination from 'app/Pagination';
@@ -30,9 +30,11 @@ function MainView({
   const movies = useAppSelector(state => state.movie.movies)
   const mode = useAppSelector(state => state.movie.mode)
   const totalPages = useAppSelector(state => state.movie.totalPages)
-  const { isSuccess, data, isLoading, isRefetching, isError } = useQuery({
+  const keyword = useAppSelector(state => state.movie.keyword)
+  const isMovieSearching = useIsFetching({ queryKey: [movieSearchPath, { page: currentPage, keyword, mode }] })
+  const { isSuccess, data, isLoading, isError } = useQuery({
     enabled: mode === MovieMode.POPULAR,
-    queryKey: [popularMoviePath, currentPage],
+    queryKey: [popularMoviePath, currentPage, mode],
     queryFn: () => getPopularList(currentPage),
   })
 
@@ -42,11 +44,10 @@ function MainView({
   useEffect(() => {
     if (isSuccess && mode === MovieMode.POPULAR) {
       dispatch(mutateSearchResult({ ...data }));
-      dispatch(mutateMovieMode({ mode: MovieMode.POPULAR }))
     }
   }, [isSuccess, data, mode, dispatch])
 
-  if (isLoading || isRefetching) {
+  if (isLoading || isMovieSearching) {
     return <>{movieSearchingComponent}</>;
   } else if (isError) {
     return <>{emptyComponent}</>
