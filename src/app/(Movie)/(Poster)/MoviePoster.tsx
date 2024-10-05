@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import REVIEW, { reviewPath } from "services/Review";
-import { useQuery } from '@tanstack/react-query';
+import { useGetMovieReviews } from "services/hooks/useGetMovieReviews";
 import MoviePosterTitle from "./MoviePosterTitle";
 import MoviePosterImage from "./MoviePosterImage";
 
@@ -12,10 +11,7 @@ type Props = {
 
 function MoviePoster({ movie }: Props) {
 	const [reviews, setReviews] = useState<Review[]>([]);
-	const { data, isLoading, isError } = useQuery({
-		queryKey: [reviewPath, movie.title],
-		queryFn: ({ signal }) => REVIEW.getAll(movie.title, { signal }),
-	})
+	const { data, isLoading, isError } = useGetMovieReviews(movie.title);
 
 	useEffect(() => {
 		if (!isLoading && !isError && data) {
