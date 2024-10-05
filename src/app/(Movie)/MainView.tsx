@@ -2,17 +2,13 @@
 
 import { useEffect } from 'react'
 import { movieSearchPath } from 'services/Movies'
-import {
-  mutateSearchResult,
-  changePage
-} from '@/store/slices/movieSlice';
+import { mutateSearchResult } from '@/store/slices/movieSlice';
 import { useIsFetching } from '@tanstack/react-query'
 import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useGetMovies } from 'services/hooks/useGetMovie'
-import Pagination from 'app/Pagination';
 import MovieList from "./MovieList";
-
+import MovieFooter from './MovieFooter';
 type Prop = Readonly<{
   emptyComponent: React.ReactNode;
   movieSearchingComponent: React.ReactNode;
@@ -26,7 +22,6 @@ function MainView({
   const currentPage = useAppSelector(state => state.movie.currentPage)
   const movies = useAppSelector(state => state.movie.movies)
   const mode = useAppSelector(state => state.movie.mode)
-  const totalPages = useAppSelector(state => state.movie.totalPages)
   const keyword = useAppSelector(state => state.movie.keyword)
   const isMovieSearching = useIsFetching({ queryKey: [movieSearchPath, { page: currentPage, keyword, mode }] })
   const { isSuccess, data, isLoading, isError } = useGetMovies({
@@ -50,17 +45,10 @@ function MainView({
     return <>{emptyComponent}</>
   } else {
     return movies?.length
-      ? <div>
+      ? <>
         <MovieList movies={movies} />
-        <footer className="flex justify-center">
-          <Pagination
-            total={totalPages}
-            className="w-[600px]"
-            currentPage={currentPage}
-            changePage={(page: number) => dispatch(changePage({ pageNumber: page }))}
-          />
-        </footer>
-      </div>
+        <MovieFooter />
+      </>
       : <>{emptyComponent}</>
   }
 }
