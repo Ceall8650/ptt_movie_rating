@@ -3,7 +3,7 @@ import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import MovieMode from 'enums/MovieMode';
 import { useSearchingMovies } from 'services/hooks/useSearchingMovies';
 import InputText from 'components/Input/InputText';
-import { mutateMovieMode, changePage, mutateKeyword } from '@/store/slices/movieSlice'
+import { mutateMovieMode, mutateSearchResult, changePage, mutateKeyword } from '@/store/slices/movieSlice'
 
 type Props = Readonly<{
   className?: string,
@@ -17,7 +17,7 @@ function TopBarSearchBar({ className }: Props) {
   const page = useAppSelector(state => state.movie.currentPage)
   const currentPage = useRef(page)
   const enabled = mode === MovieMode.SEARCH && searchTriggered
-  const { isFetching } = useSearchingMovies({
+  const { isFetching, isSuccess, data } = useSearchingMovies({
     keyword,
     page,
     mode,
@@ -25,9 +25,9 @@ function TopBarSearchBar({ className }: Props) {
   })
 
   function search() {
+    setSearchTriggered(true)
     dispatch(changePage({ pageNumber: 1 }))
     dispatch(mutateMovieMode({ mode: MovieMode.SEARCH }))
-    setSearchTriggered(true)
     dispatch(mutateKeyword({ keyword }))
   }
 
@@ -36,6 +36,13 @@ function TopBarSearchBar({ className }: Props) {
       search()
     }
   }
+  // Use useEffect to dispatch after rendering
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(mutateSearchResult({ ...data }));
+    }
+  }, [isSuccess, data, dispatch]);
+
 
   useEffect(() => {
     if (currentPage.current !== page) {

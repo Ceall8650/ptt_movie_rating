@@ -1,18 +1,15 @@
 'use client'
 
 import { useEffect } from 'react'
-import {
-  popularMoviePath,
-  movieSearchPath,
-  getPopularList,
-} from 'services/Movies'
+import { movieSearchPath } from 'services/Movies'
 import {
   mutateSearchResult,
   changePage
 } from '@/store/slices/movieSlice';
-import { useQuery, useIsFetching } from '@tanstack/react-query'
+import { useIsFetching } from '@tanstack/react-query'
 import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useGetMovies } from 'services/hooks/useGetMovie'
 import Pagination from 'app/Pagination';
 import MovieList from "./MovieList";
 
@@ -32,10 +29,10 @@ function MainView({
   const totalPages = useAppSelector(state => state.movie.totalPages)
   const keyword = useAppSelector(state => state.movie.keyword)
   const isMovieSearching = useIsFetching({ queryKey: [movieSearchPath, { page: currentPage, keyword, mode }] })
-  const { isSuccess, data, isLoading, isError } = useQuery({
+  const { isSuccess, data, isLoading, isError } = useGetMovies({
+    page: currentPage,
+    mode,
     enabled: mode === MovieMode.POPULAR,
-    queryKey: [popularMoviePath, currentPage, mode],
-    queryFn: () => getPopularList(currentPage),
   })
 
   // Use useEffect to dispatch after rendering
