@@ -1,7 +1,7 @@
 import { KeyboardEvent, useState, ChangeEvent, useEffect, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import MovieMode from 'enums/MovieMode';
-import { useSearchingMovies } from 'services/hooks/useMovies';
+import { useSearchingMovies } from 'services/hooks/useSearchingMovies';
 import InputText from 'components/Input/InputText';
 import { mutateMovieMode, changePage, mutateKeyword } from '@/store/slices/movieSlice'
 
