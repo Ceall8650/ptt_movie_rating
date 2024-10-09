@@ -51,6 +51,3 @@ Workflow:
   - [X] Show a prompt message below the image
 -  Movie found
   - [X] Display the movies matched the keyword
-
-FIXME:
-- The movie poster has different heights

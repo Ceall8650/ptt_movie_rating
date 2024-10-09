@@ -14,14 +14,13 @@ function MoviePosterImage({ movie }: Props) {
 		: MovieDefaultPoster;
 
 	return (
-		<div className="relative mb-2 hover:cursor-pointer group">
+		<div className="w-full h-[270px] relative mb-2 hover:cursor-pointer group">
 			<Image
 				src={imageSource}
-				width={150}
-				height={240}
 				sizes="100vw"
 				style={{ width: "100%", height: "100%" }} // optional
 				alt={`Movie Poster: ${movie.originalTitle}`}
+				fill
 				className="
 				group-hover:blur-[1px]
 				group-hover:brightness-50
