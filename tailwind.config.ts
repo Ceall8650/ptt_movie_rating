@@ -44,7 +44,11 @@ const config: Config = {
       zIndex: {
         'topBar': '1',
         'modal': '2',
-      }
+      },
+      gridTemplateColumns: {
+        'md-poster': 'repeat(5, 170px)',
+        'sm-poster': 'repeat(4, 170px)',
+      },
     },
   },
   plugins: [
