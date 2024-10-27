@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { PAGE_AMOUNT } from 'common/pagination'
 
 type Props = Readonly<{
   total: number,
@@ -6,8 +7,6 @@ type Props = Readonly<{
   changePage: Function
   className?: string,
 }>
-const PAGE_AMOUNT = 10
-
 export default function Pagination({
   total,
   className,

@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useIsFetching } from '@tanstack/react-query'
 import { movieSearchPath } from 'services/Movies'
 import { mutateSearchResult } from '@/store/slices/movieSlice';
-import { useIsFetching } from '@tanstack/react-query'
 import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useGetMovies } from 'services/hooks/useGetMovie'
+import { queryClient } from 'app/Providers'
 import MovieList from "./MovieList";
 import MovieFooter from './MovieFooter';
 type Prop = Readonly<{
