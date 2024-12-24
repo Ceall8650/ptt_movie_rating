@@ -48,7 +48,6 @@ if (typeof window !== 'undefined') {
 function Providers({ children }: Readonly<{
   children: React.ReactNode
 }>) {
-
   return (
     <ThemeProvider attribute="class">
       <StoreProvider>

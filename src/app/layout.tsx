@@ -2,7 +2,7 @@ import { Inter } from 'next/font/google'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import 'scss/app.scss'
 import Providers from './Providers';
-
+import TopBarView from './(TopBar)/TopBarView';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,7 +35,12 @@ export default function RootLayout({
         className={`${inter.className} ${darkModeClassName}`}
       >
         <Providers>
-          {children}
+        <div className="h-full overflow-auto flex flex-col">
+            <TopBarView className="mb-5" />
+            <div className="px-6">
+              {children}
+            </div>
+          </div>
           <ReactQueryDevtools initialIsOpen={false} />
         </Providers>
       </body>

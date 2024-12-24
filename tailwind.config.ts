@@ -42,8 +42,7 @@ const config: Config = {
         dotThree: 'dotThree 2s infinite linear',
       },
       zIndex: {
-        'topBar': '1',
-        'modal': '2',
+        'modal': '1',
       },
       gridTemplateColumns: {
         'md-poster': 'repeat(5, 170px)',

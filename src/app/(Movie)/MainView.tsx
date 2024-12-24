@@ -7,7 +7,6 @@ import { mutateSearchResult } from '@/store/slices/movieSlice';
 import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { useGetMovies } from 'services/hooks/useGetMovie'
-import { queryClient } from 'app/Providers'
 import MovieList from "./MovieList";
 import MovieFooter from './MovieFooter';
 type Prop = Readonly<{

@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from 'next/link'
 import MovieDefaultPoster from "assets/images/movieDefaultPoster.svg";
-import { getImageUrl } from "../../../common/utilities";
+import { getImageUrl } from "common/utilities";
 
 type Props = {
 	readonly movie: FormattedResponseMovie;
@@ -14,7 +15,10 @@ function MoviePosterImage({ movie }: Props) {
 		: MovieDefaultPoster;
 
 	return (
-		<div className="w-full h-[270px] relative mb-2 hover:cursor-pointer group">
+		<Link
+			href={`/movies/${movie.id}`}
+			className="w-full h-[270px] relative mb-2 hover:cursor-pointer group"
+		>
 			<Image
 				src={imageSource}
 				sizes="100vw"
@@ -45,7 +49,7 @@ function MoviePosterImage({ movie }: Props) {
 					<span className="text-sm">查詢評價</span>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 }
 

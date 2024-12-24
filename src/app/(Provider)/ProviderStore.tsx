@@ -3,7 +3,7 @@
 import { Provider } from 'react-redux'
 import store from 'store/index';
 
-function StoreProvider({ children }: { children: React.ReactNode }) {
+function StoreProvider({ children }: { readonly children: React.ReactNode }) {
   return (
     <Provider store={store}>
       {children}

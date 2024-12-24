@@ -1,6 +1,7 @@
 "use client";
 
 import { useAppDispatch } from "store/hooks";
+import { usePathname, useRouter } from 'next/navigation'
 import MovieMode from 'enums/MovieMode';
 import { changePage, mutateMovieMode } from 'store/slices/movieSlice';
 import TopBarSearchBar from "./TopBarSearchBar";
@@ -12,11 +13,16 @@ type Props = Readonly<{
 
 function TopBarView({ className }: Props) {
 	const dispatch = useAppDispatch()
-	const rootClassName = `fixed top-0 left-0 z-topBar w-full bg-white dark:bg-dark-mode-primary flex justify-between px-6 py-4 drop-shadow-lg`;
+	const router = useRouter()
+	const pathname = usePathname()
+	const rootClassName = `w-full bg-white dark:bg-dark-mode-primary flex justify-between px-6 py-4 drop-shadow-lg`;
 
 	function getPopularMovies() {
 		dispatch(mutateMovieMode({ mode: MovieMode.POPULAR }))
 		dispatch(changePage({ pageNumber: 1 }))
+		if (pathname !== '/') {
+			router.push('/')
+		}
 	}
 
 	return (
