@@ -10,7 +10,7 @@ type Options = {
 	mode?: string;
 };
 
-export const useGetMovies = (
+export const useQueryMovies = (
 	options: Options = { page: 1, enabled: true, mode: "" }
 ) => {
 	const { page, enabled, mode } = options;

@@ -37,7 +37,7 @@ export default function RootLayout({
         <Providers>
         <div className="h-full overflow-auto flex flex-col">
             <TopBarView className="mb-5" />
-            <div className="px-6">
+            <div className="h-full px-6">
               {children}
             </div>
           </div>

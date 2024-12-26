@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { movieSearchPath, search } from "services/Movies";
+import { movieSearchPath, searchMovies } from "services/Movies";
 
 type Options = {
 	keyword: string;
@@ -15,6 +15,6 @@ export const useSearchingMovies = (
 	return useQuery({
 		queryKey: [movieSearchPath, { page, keyword, mode }],
 		enabled: enabled && !!keyword,
-		queryFn: () => search(keyword, page),
+		queryFn: () => searchMovies(keyword, page),
 	});
 };

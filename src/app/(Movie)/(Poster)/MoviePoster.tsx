@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useGetMovieReviews } from "services/hooks/useGetMovieReviews";
+import { useQueryMovieReviews } from "services/hooks/useQueryMovieReviews";
 import MoviePosterTitle from "./MoviePosterTitle";
 import MoviePosterImage from "./MoviePosterImage";
 
@@ -11,7 +11,7 @@ type Props = {
 
 function MoviePoster({ movie }: Props) {
 	const [reviews, setReviews] = useState<Review[]>([]);
-	const { data, isLoading, isError } = useGetMovieReviews(movie.title);
+	const { data, isLoading, isError } = useQueryMovieReviews(movie.title);
 
 	useEffect(() => {
 		if (!isLoading && !isError && data) {

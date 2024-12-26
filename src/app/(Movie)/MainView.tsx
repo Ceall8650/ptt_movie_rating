@@ -6,7 +6,7 @@ import { movieSearchPath } from 'services/Movies'
 import { mutateSearchResult } from '@/store/slices/movieSlice';
 import MovieMode from 'enums/MovieMode';
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { useGetMovies } from 'services/hooks/useGetMovie'
+import { useQueryMovies } from 'services/hooks/useQueryMovies'
 import MovieList from "./MovieList";
 import MovieFooter from './MovieFooter';
 type Prop = Readonly<{
@@ -24,7 +24,7 @@ function MainView({
   const mode = useAppSelector(state => state.movie.mode)
   const keyword = useAppSelector(state => state.movie.keyword)
   const isMovieSearching = useIsFetching({ queryKey: [movieSearchPath, { page: currentPage, keyword, mode }] })
-  const { isSuccess, data, isLoading, isError } = useGetMovies({
+  const { isSuccess, data, isLoading, isError } = useQueryMovies({
     page: currentPage,
     mode,
     enabled: mode === MovieMode.POPULAR,
