@@ -14,11 +14,12 @@ You can get the rating of each movie that published in PTT movie group
 - Movie Search
 - Light/Dark mode
 - Auto-refetch data when the network reconnected
+- Responsive Web Design(RWD)
 
 ## Performance Tune
-- Responsive Web Design(RWD)
 - Image Lazy loading
 - Dedupe the API request
+- Page navigation when running massive API request
 
 ## Environment requirement
 - Node.js: v18.15.0 or later

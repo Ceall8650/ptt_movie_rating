@@ -27,6 +27,11 @@ class AuthFetch {
   async getFetchRequest(method: string, path: string, payload?: Object):Promise<Object> {
     const req = this.getRequest(method, path, payload)
     const response = await fetch(req)
+
+    if(!response.ok) {
+      throw response
+    }
+
     const data = await response.json()
 
     return data

@@ -35,7 +35,7 @@ export default function RootLayout({
         className={`${inter.className} ${darkModeClassName}`}
       >
         <Providers>
-        <div className="h-full overflow-auto flex flex-col">
+          <div className="h-full overflow-auto flex flex-col">
             <TopBarView className="mb-5" />
             <div className="h-full px-6">
               {children}

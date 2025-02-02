@@ -1,11 +1,25 @@
 "use client";
-import { useAppSelector } from "store/hooks";
-import { useParams } from "next/navigation";
+import { useParams, notFound } from "next/navigation";
+import { useQueryMovie } from "services/hooks/useQueryMovie";
+import MovieSearching from "app/(Movie)/MovieSearching";
+import MovieView from "./(movie)/MovieView";
 
 export default function MoviePage() {
-  const movies = useAppSelector(state => state.movie.movies)
   const { id } = useParams();
-  const movie: FormattedResponseMovie | undefined = movies?.find(movie => movie.id === Number(id))
+  const { data: movie, isLoading, isError } = useQueryMovie(id as string);
 
-  return <div>{movie?.title}</div>;
+
+  if (isError) {
+    notFound()
+  }
+
+  if (isLoading) {
+    return <MovieSearching />
+  }
+
+  return (
+    movie
+      ? <MovieView movie={movie} />
+      : notFound()
+  );
 }
