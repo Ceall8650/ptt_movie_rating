@@ -18,8 +18,8 @@ You can get the rating of each movie that published in PTT movie group
 
 ## Performance Tune
 - Image Lazy loading
-- Dedupe the API request
-- Page navigation when running massive API request
+- Dedupe the API requests
+- Smoothly navigate page when running massive API request
 
 ## Environment requirement
 - Node.js: v18.15.0 or later
