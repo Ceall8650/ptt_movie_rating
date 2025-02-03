@@ -1,7 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Link from 'next/link'
+import { useRouter } from "next/navigation";
+import { useQueryClient } from '@tanstack/react-query'
+import { getQueryKey } from "services/hooks/useQueryMovieReviews";
+import { useAppSelector } from "store/hooks";
 import MovieDefaultPoster from "assets/images/movieDefaultPoster.svg";
 import { getImageUrl } from "common/utilities";
 
@@ -10,13 +13,24 @@ type Props = {
 };
 
 function MoviePosterImage({ movie }: Props) {
+	const router = useRouter();
+	const movies = useAppSelector(state => state.movie.movies)
+	const queryClient = useQueryClient()
 	const imageSource = movie.posterPath
 		? getImageUrl(movie.posterPath)
 		: MovieDefaultPoster;
 
+	function handleClick() {
+		movies?.forEach(movie => {
+			queryClient.cancelQueries({ queryKey: getQueryKey(movie.title) })
+		})
+
+		router.push(`/movies/${movie.id}`);
+	}
+
 	return (
-		<Link
-			href={`/movies/${movie.id}`}
+		<button
+			onClick={handleClick}
 			className="w-full h-[270px] relative mb-2 hover:cursor-pointer group"
 		>
 			<Image
@@ -49,7 +63,7 @@ function MoviePosterImage({ movie }: Props) {
 					<span className="text-sm">查詢評價</span>
 				</div>
 			</div>
-		</Link>
+		</button>
 	);
 }
 
