@@ -1,5 +1,9 @@
+// @ts-check
+import withPlaiceholder from "@plaiceholder/next";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["@plaiceholder/ui"],
   images: {
     remotePatterns: [
       {
@@ -12,4 +16,4 @@ const nextConfig = {
   }
 }
 
-module.exports = nextConfig
+export default withPlaiceholder(nextConfig);
