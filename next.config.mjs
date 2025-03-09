@@ -5,6 +5,7 @@ import withPlaiceholder from "@plaiceholder/next";
 const nextConfig = {
   transpilePackages: ["@plaiceholder/ui"],
   images: {
+    domains: ['cdn.sanity.io'], // Ref: https://github.com/vercel/next.js/discussions/60803#discussioncomment-8165517
     remotePatterns: [
       {
         protocol: 'https',
