@@ -1,6 +1,9 @@
 import { getPlaiceholder } from "plaiceholder";
+import { ErrorBoundary } from 'react-error-boundary'
+import { notFound } from 'next/navigation'
 import { getMovie } from "services/Movies";
 import ImageProvider from "./(Providers)/ImageProvider";
+import NotFound from "app/not-found";
 
 type Props = {
   readonly children: React.ReactNode
@@ -8,7 +11,6 @@ type Props = {
     readonly id: string
   }
 }
-
 
 async function getImageBase64(imageUrl: string) {
   try {
@@ -24,16 +26,31 @@ async function getImageBase64(imageUrl: string) {
   }
 }
 
+async function getMovieData(movieId: string) {
+  try {
+    const movie: ResponseMovie = await getMovie(movieId)
+    const imageUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`
+    const base64 = await getImageBase64(imageUrl)
+
+    return {
+      imageUrl,
+      base64
+    }
+  } catch (error) {
+    notFound()
+  }
+}
+
 async function MovieLayout({ children, params }: Props) {
-  const movie: ResponseMovie = await getMovie(params.id)
-  const imageUrl = `https://image.tmdb.org/t/p/original${movie.poster_path}`
-  const base64 = await getImageBase64(imageUrl)
+  const { imageUrl, base64 } = await getMovieData(params.id)
 
   return <ImageProvider image={{
     url: imageUrl,
     base64: base64
   }}>
-    {children}
+    <ErrorBoundary fallback={<NotFound />}>
+      {children}
+    </ErrorBoundary>
   </ImageProvider>
 }
 

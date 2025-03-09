@@ -1,7 +1,7 @@
 import MovieSearching from "app/(Movie)/MovieSearching";
 
 function Loading() {
-  return <MovieSearching />;
+  return <MovieSearching />
 }
 
 export default Loading;

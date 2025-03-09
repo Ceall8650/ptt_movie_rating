@@ -19,6 +19,7 @@ You can get the rating of each movie that published in PTT movie group
 ## Performance Tune
 - Image Lazy loading
 - Dedupe the API requests
+- Cache the API response
 - Smoothly navigate page when running massive API request
 
 ## UX Enhance
