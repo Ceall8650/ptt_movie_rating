@@ -2,6 +2,10 @@
 
 import { createContext } from 'react'
 
+export type MovieImage = {
+  readonly url: string
+  readonly base64: string
+}
 type Props = {
   readonly children: React.ReactNode
   readonly image: MovieImage

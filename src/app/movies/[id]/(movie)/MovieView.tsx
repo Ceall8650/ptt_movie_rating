@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useContext } from "react";
+import type { ResponseMovie } from "services/utilities/movie";
 import { ImageContext } from "@/app/movies/[id]/(Providers)/ImageProvider";
+import type { MovieImage } from "@/app/movies/[id]/(Providers)/ImageProvider";
 
 type Props = {
   readonly movie: ResponseMovie
@@ -18,7 +20,7 @@ function MovieView({ movie }: Props) {
           width={150}
           height={200}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          className="md:[width:200px] mr-4"
+          className="md:[width:200px]"
           placeholder="blur"
           blurDataURL={image.base64}
         />

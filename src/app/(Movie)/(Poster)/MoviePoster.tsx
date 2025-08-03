@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useQueryMovieReviews } from "services/hooks/useQueryMovieReviews";
+import type { FormattedResponseMovie } from "services/utilities/movie";
+import type { Review } from "services/Review";
 import MoviePosterTitle from "./MoviePosterTitle";
 import MoviePosterImage from "./MoviePosterImage";
 

@@ -2,6 +2,7 @@ import { getPlaiceholder } from "plaiceholder";
 import { ErrorBoundary } from 'react-error-boundary'
 import { notFound } from 'next/navigation'
 import { getMovie } from "services/Movies";
+import type { ResponseMovie } from "services/utilities/movie";
 import ImageProvider from "./(Providers)/ImageProvider";
 import NotFound from "app/not-found";
 

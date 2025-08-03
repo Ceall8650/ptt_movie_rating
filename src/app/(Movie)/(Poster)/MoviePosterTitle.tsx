@@ -2,6 +2,7 @@
 import { useMemo } from "react";
 import Image from "next/image";
 import LikeImage from "assets/images/like.png";
+import type { Review } from "services/Review";
 
 type Props = Readonly<{
 	title: string;

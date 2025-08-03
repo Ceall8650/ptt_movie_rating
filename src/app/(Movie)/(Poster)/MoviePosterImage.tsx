@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQueryClient } from '@tanstack/react-query'
 import { getQueryKey } from "services/hooks/useQueryMovieReviews";
+import type { FormattedResponseMovie } from "services/utilities/movie";
 import { useAppSelector } from "store/hooks";
 import MovieDefaultPoster from "assets/images/movieDefaultPoster.svg";
 import { getImageUrl } from "common/utilities";

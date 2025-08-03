@@ -1,3 +1,4 @@
+import type { FormattedResponseMovie } from "services/utilities/movie";
 import MoviePoster from "./(Poster)/MoviePoster";
 
 type Props = Readonly<{

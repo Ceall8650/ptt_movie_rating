@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { FormattedResponseMovie } from "services/utilities/movie";
 import MovieMode from '../../enums/MovieMode';
 
 type movieState = {
